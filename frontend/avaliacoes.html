@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Avaliações e Feedback - BovinTrade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #dedbd2;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 60px;
+      box-sizing: border-box;
+      min-height: 100vh;
+      width: 100vw;
+    }
+
+    .container {
+      background: #fff;
+      border: 1px solid #dedbd2;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      padding: 2.5rem 3rem;
+      width: 100%;
+      max-width: 600px;
+      box-sizing: border-box;
+      text-align: left;
+    }
+
+    h1 {
+      font-family: 'Lora', serif;
+      color: #8B0000;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    p.description {
+      font-size: 1.05rem;
+      color: #444;
+      margin-bottom: 2rem;
+      line-height: 1.4;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #222;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .rating {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: flex-start;
+      gap: 6px;
+      font-size: 2rem;
+      unicode-bidi: bidi-override;
+      direction: rtl;
+    }
+
+    .rating input {
+      display: none;
+    }
+
+    .rating label {
+      cursor: pointer;
+      color: #ccc;
+      transition: color 0.3s;
+    }
+
+    .rating input:checked ~ label,
+    .rating label:hover,
+    .rating label:hover ~ label {
+      color: #8B0000;
+    }
+
+    textarea {
+      width: 100%;
+      resize: vertical;
+      padding: 10px 12px;
+      border: 1.5px solid #dedbd2;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      transition: border-color 0.3s ease;
+      min-height: 100px;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: #8B0000;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    button {
+      padding: 14px 28px;
+      background-color: transparent;
+      color: #000;
+      border: 2px solid #8B0000;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    button:hover {
+      background-color: #8B0000;
+      color: #fff;
+    }
+
+    .info-text {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: -12px;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Avaliações e Feedback</h1>
+    <p class="description">
+      Avalie a qualidade do lote e o processo de pagamento. A avaliação é feita em uma escala de 1 a 5 estrelas, com comentário opcional. Após enviar, não será possível alterar a avaliação.
+    </p>
+
+    <form id="avaliacaoForm" autocomplete="off">
+      <div>
+        <label for="ratingFrigorifico">Avaliação do Frigorífico (Qualidade do Lote) *</label>
+        <div class="rating" id="ratingFrigorifico">
+          <input type="radio" id="star5-f" name="ratingFrigorifico" value="5" required /><label for="star5-f" title="5 estrelas">★</label>
+          <input type="radio" id="star4-f" name="ratingFrigorifico" value="4" /><label for="star4-f" title="4 estrelas">★</label>
+          <input type="radio" id="star3-f" name="ratingFrigorifico" value="3" /><label for="star3-f" title="3 estrelas">★</label>
+          <input type="radio" id="star2-f" name="ratingFrigorifico" value="2" /><label for="star2-f" title="2 estrelas">★</label>
+          <input type="radio" id="star1-f" name="ratingFrigorifico" value="1" /><label for="star1-f" title="1 estrela">★</label>
+        </div>
+      </div>
+
+      <div>
+        <label for="ratingFazenda">Avaliação da Fazenda (Processo de Pagamento) *</label>
+        <div class="rating" id="ratingFazenda">
+          <input type="radio" id="star5-fa" name="ratingFazenda" value="5" required /><label for="star5-fa" title="5 estrelas">★</label>
+          <input type="radio" id="star4-fa" name="ratingFazenda" value="4" /><label for="star4-fa" title="4 estrelas">★</label>
+          <input type="radio" id="star3-fa" name="ratingFazenda" value="3" /><label for="star3-fa" title="3 estrelas">★</label>
+          <input type="radio" id="star2-fa" name="ratingFazenda" value="2" /><label for="star2-fa" title="2 estrelas">★</label>
+          <input type="radio" id="star1-fa" name="ratingFazenda" value="1" /><label for="star1-fa" title="1 estrela">★</label>
+        </div>
+      </div>
+
+      <div>
+        <label for="comments">Comentários (opcional)</label>
+        <textarea id="comments" name="comments" placeholder="Deixe seu feedback aqui..."></textarea>
+      </div>
+
+      <p class="info-text">Após enviar, a avaliação não poderá ser alterada.</p>
+
+      <div class="button-container">
+        <button type="submit">Enviar Avaliação</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('avaliacaoForm');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      alert('Avaliação enviada com sucesso! (Funcionalidade simulada)');
+
+      form.querySelectorAll('input, textarea, button').forEach(el => el.disabled = true);
+    });
+  </script>
+</body>
+</html>

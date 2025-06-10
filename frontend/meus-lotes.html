@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meus Lotes Cadastrados - BovinTrade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #dedbd2;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 60px;
+      box-sizing: border-box;
+      min-height: 100vh;
+      width: 100vw;
+    }
+
+    .container {
+      background: #fff;
+      border: 1px solid #dedbd2;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      padding: 2.5rem 3rem;
+      width: 100%;
+      max-width: 1000px;
+      box-sizing: border-box;
+      text-align: left;
+    }
+
+    h1 {
+      font-family: 'Lora', serif;
+      color: #8B0000;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    .add-lote {
+      display: inline-block;
+      background-color: transparent;
+      color: #000;
+      padding: 10px 15px;
+      text-decoration: none;
+      border: 2px solid #8B0000;
+      border-radius: 10px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .add-lote:hover {
+      background-color: #8B0000;
+      color: #fff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    thead {
+      background-color: #8B0000;
+      color: #fff;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid #dedbd2;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tbody tr:hover {
+      background-color: #f1e7e7;
+      cursor: pointer;
+    }
+
+    .actions button {
+      padding: 6px 12px;
+      margin: 2px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    .edit-btn {
+      background-color: #2196F3;
+      color: white;
+    }
+
+    .edit-btn:hover {
+      background-color: #0b7dda;
+    }
+
+    .delete-btn {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .delete-btn:hover {
+      background-color: #d32f2f;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Meus Lotes Cadastrados</h1>
+    <a href="#" class="add-lote">+ Cadastrar Novo Lote</a>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Raça</th>
+          <th>Quantidade</th>
+          <th>Peso Médio (kg)</th>
+          <th>Alimentação</th>
+          <th>Preço Total (R$)</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>001</td>
+          <td>Nelore</td>
+          <td>15</td>
+          <td>420</td>
+          <td>Pasto</td>
+          <td>78.000</td>
+          <td>Disponível</td>
+          <td class="actions">
+            <button class="edit-btn">Editar</button>
+            <button class="delete-btn">Excluir</button>
+          </td>
+        </tr>
+        <tr>
+          <td>002</td>
+          <td>Angus</td>
+          <td>10</td>
+          <td>480</td>
+          <td>Ração</td>
+          <td>65.000</td>
+          <td>Vendido</td>
+          <td class="actions">
+            <button class="edit-btn">Editar</button>
+            <button class="delete-btn">Excluir</button>
+          </td>
+        </tr>
+        <tr>
+          <td>003</td>
+          <td>Brangus</td>
+          <td>20</td>
+          <td>390</td>
+          <td>Silagem</td>
+          <td>85.000</td>
+          <td>Disponível</td>
+          <td class="actions">
+            <button class="edit-btn">Editar</button>
+            <button class="delete-btn">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

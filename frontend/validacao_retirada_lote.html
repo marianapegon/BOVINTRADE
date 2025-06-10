@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Validação de Retirada do Lote - BovinTrade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #dedbd2;
+      display: flex;
+      justify-content: center;
+      padding: 40px 60px;
+    }
+
+    .container {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2.5rem 3rem;
+      width: 100%;
+      max-width: 800px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      font-family: 'Lora', serif;
+      color: #8B0000;
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 16px;
+      font-weight: 600;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .button-container {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    button {
+      padding: 12px 24px;
+      background-color: transparent;
+      color: #000;
+      border: 2px solid #8B0000;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #8B0000;
+      color: #fff;
+    }
+
+    .status {
+      margin-top: 2rem;
+      padding: 1rem;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+      border-left: 5px solid #8B0000;
+    }
+
+    .status p {
+      margin: 0;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Validação da Retirada do Lote</h1>
+
+    <label for="responsavelEntrega">Nome do Responsável pela Entrega</label>
+    <input type="text" id="responsavelEntrega" placeholder="Ex: João Silva (fazendeiro)" />
+
+    <label for="responsavelRetirada">Nome do Responsável pela Retirada</label>
+    <input type="text" id="responsavelRetirada" placeholder="Ex: Marcos Rocha (motorista)" />
+
+    <label for="dataHora">Data e Hora da Retirada</label>
+    <input type="datetime-local" id="dataHora" />
+
+    <label for="tipoValidacao">Tipo de Validação</label>
+    <select id="tipoValidacao">
+      <option value="documento">Documento de Identidade com foto</option>
+      <option value="codigo">Código de Retirada</option>
+      <option value="qrcode">Leitura de QR Code</option>
+    </select>
+
+    <label for="arquivoDocumento">Upload de Documento (foto ou PDF)</label>
+    <input type="file" id="arquivoDocumento" accept=".jpg, .jpeg, .png, .pdf" />
+
+    <label for="observacoes">Observações adicionais</label>
+    <textarea id="observacoes" placeholder="Ex: Documento apresentado com foto legível, QR Code validado com sucesso..."></textarea>
+
+    <div class="status">
+      <p><strong>Status do Lote:</strong> Aguardando entrega</p>
+    </div>
+
+    <div class="button-container">
+      <button onclick="confirmarEntrega()">Confirmar Retirada</button>
+    </div>
+  </div>
+
+  <script>
+    function confirmarEntrega() {
+      const entrega = document.getElementById('responsavelEntrega').value;
+      const retirada = document.getElementById('responsavelRetirada').value;
+      const data = document.getElementById('dataHora').value;
+
+      if (!entrega || !retirada || !data) {
+        alert("Preencha todos os campos obrigatórios.");
+        return;
+      }
+
+      document.querySelector('.status').innerHTML = `
+        <p><strong>Status do Lote:</strong> Entregue</p>
+        <p><strong>Confirmado por:</strong> ${entrega}</p>
+        <p><strong>Retirado por:</strong> ${retirada}</p>
+        <p><strong>Data e Hora:</strong> ${new Date(data).toLocaleString()}</p>
+      `;
+
+      alert("Retirada confirmada com sucesso!");
+    }
+  </script>
+</body>
+</html>

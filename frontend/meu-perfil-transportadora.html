@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meu Perfil - Transportadora</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #f2f1ee, #e8e6e1);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 3rem 1rem;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .perfil-container {
+      background: #fff;
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 600px;
+      border: 1px solid #dedbd2;
+    }
+
+    .perfil-container h1 {
+      font-family: 'Lora', serif;
+      color: #8B0000;
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .perfil-info label {
+      font-weight: 600;
+      color: #333;
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.3rem;
+      font-size: 1rem;
+    }
+
+    .perfil-info span {
+      font-weight: 400;
+      color: #555;
+      font-size: 1rem;
+      background-color: #f9f9f9;
+      padding: 8px 12px;
+      border-radius: 8px;
+      display: block;
+      user-select: text;
+    }
+
+    .btn-editar {
+      margin-top: 2.5rem;
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background-color: transparent;
+      color: #000;
+      border: 2px solid #8B0000;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .btn-editar:hover {
+      background-color: #8B0000;
+      color: #fff;
+      text-decoration: none;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="perfil-container">
+    <h1>Meu Perfil</h1>
+    <div class="perfil-info">
+      <label>Nome da Transportadora:</label>
+      <span>TransBoi Logística</span>
+
+      <label>CNPJ:</label>
+      <span>12.345.678/0001-90</span>
+
+      <label>Endereço:</label>
+      <span>Rua das Acácias, 123 - Bairro Industrial, São Paulo - SP</span>
+
+      <label>Telefone:</label>
+      <span>(11) 98765-4321</span>
+
+      <label>Email:</label>
+      <span>contato@transboi.com.br</span>
+
+      <label>Responsável:</label>
+      <span>Marcos Oliveira</span>
+
+      <label>Frota:</label>
+      <span>15 Caminhões - Carreta, Truck, Bitrem</span>
+    </div>
+
+    <a href="editar-perfil-transportadora.html" class="btn-editar">Editar Perfil</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pagamento - BovinTrade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #dedbd2;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 60px;
+      box-sizing: border-box;
+      min-height: 100vh;
+      width: 100vw;
+    }
+
+    .container {
+      background: #fff;
+      border: 1px solid #dedbd2;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      padding: 2.5rem 3rem;
+      width: 100%;
+      max-width: 600px;
+      box-sizing: border-box;
+      text-align: left;
+    }
+
+    h1 {
+      font-family: 'Lora', serif;
+      color: #8B0000;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    p.description {
+      font-size: 1.05rem;
+      color: #444;
+      margin-bottom: 2rem;
+      line-height: 1.4;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #222;
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    select, input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid #dedbd2;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      transition: border-color 0.3s ease;
+    }
+
+    select:focus, input[type="text"]:focus, input[type="number"]:focus {
+      outline: none;
+      border-color: #8B0000;
+    }
+
+    .pix-info, .transfer-info, .card-info {
+      background-color: #f9f9f9;
+      border: 1px solid #dedbd2;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 0.95rem;
+      color: #333;
+      margin-top: 8px;
+    }
+
+    .qr-code {
+      display: block;
+      margin: 10px auto;
+      max-width: 200px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 12px;
+      background: white;
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 14px;
+      background-color: transparent;
+      color: #000;
+      border: 2px solid #8B0000;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    button:hover {
+      background-color: #8B0000;
+      color: #fff;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Pagamento</h1>
+    <p class="description">
+      Escolha a forma de pagamento para concluir a compra do lote de bois.
+    </p>
+
+    <form id="paymentForm">
+      <label for="paymentMethod">Forma de Pagamento *</label>
+      <select id="paymentMethod" name="paymentMethod" required>
+        <option value="" disabled selected>Selecione</option>
+        <option value="pix">PIX</option>
+        <option value="transferencia">Transferência Bancária</option>
+        <option value="cartao">Cartão de Crédito</option>
+      </select>
+
+      <div id="pixDetails" class="pix-info" style="display:none;">
+        <p><strong>Chave PIX da fazenda:</strong> 123e4567-e89b-12d3-a456-426614174000</p>
+        <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=123e4567-e89b-12d3-a456-426614174000" alt="QR Code PIX" />
+      </div>
+
+      <div id="transferDetails" class="transfer-info" style="display:none;">
+        <p><strong>Dados para Transferência Bancária:</strong></p>
+        <ul>
+          <li>Banco: Banco Exemplo</li>
+          <li>Agência: 1234</li>
+          <li>Conta Corrente: 56789-0</li>
+          <li>Favorecido: Fazenda BovinTrade</li>
+          <li>CPF/CNPJ: 00.000.000/0001-00</li>
+        </ul>
+      </div>
+
+      <div id="cardDetails" class="card-info" style="display:none;">
+        <label for="cardNumber">Número do Cartão *</label>
+        <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" pattern="\d{4} \d{4} \d{4} \d{4}" />
+        
+        <label for="cardName">Nome no Cartão *</label>
+        <input type="text" id="cardName" name="cardName" placeholder="Nome do titular" />
+
+        <label for="cardExpiry">Validade (MM/AA) *</label>
+        <input type="text" id="cardExpiry" name="cardExpiry" placeholder="MM/AA" maxlength="5" pattern="(0[1-9]|1[0-2])\/\d{2}" />
+
+        <label for="cardCVV">CVV *</label>
+        <input type="number" id="cardCVV" name="cardCVV" placeholder="123" maxlength="3" min="100" max="999" />
+      </div>
+
+      <button type="submit">Confirmar Pagamento</button>
+    </form>
+  </div>
+
+  <script>
+    const paymentMethodSelect = document.getElementById('paymentMethod');
+    const pixDetails = document.getElementById('pixDetails');
+    const transferDetails = document.getElementById('transferDetails');
+    const cardDetails = document.getElementById('cardDetails');
+
+    paymentMethodSelect.addEventListener('change', () => {
+      const value = paymentMethodSelect.value;
+      pixDetails.style.display = 'none';
+      transferDetails.style.display = 'none';
+      cardDetails.style.display = 'none';
+
+      if (value === 'pix') {
+        pixDetails.style.display = 'block';
+      } else if (value === 'transferencia') {
+        transferDetails.style.display = 'block';
+      } else if (value === 'cartao') {
+        cardDetails.style.display = 'block';
+      }
+    });
+
+    document.getElementById('paymentForm').addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Pagamento confirmado! (Funcionalidade simulada)');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirmar Entregas - Transportadora</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #f2f1ee, #e8e6e1);
+      margin: 0;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .confirmar-container {
+      background: #fff;
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 800px;
+      border: 1px solid #dedbd2;
+    }
+
+    .confirmar-container h1 {
+      font-family: 'Lora', serif;
+      color: #8B0000;
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .entrega-card {
+      border: 1px solid #ccc;
+      border-left: 6px solid #8B0000;
+      border-radius: 10px;
+      padding: 1.2rem;
+      margin-bottom: 1.5rem;
+      background-color: #f9f9f9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .entrega-info {
+      flex: 1 1 60%;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    .entrega-info strong {
+      font-weight: 600;
+      color: #000;
+    }
+
+    .btn-confirmar {
+      background-color: transparent;
+      color: #8B0000;
+      border: 2px solid #8B0000;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex: 1 1 30%;
+      max-width: 150px;
+    }
+
+    .btn-confirmar:hover {
+      background-color: #8B0000;
+      color: #fff;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 2rem;
+      text-align: center;
+      text-decoration: none;
+      color: #8B0000;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="confirmar-container">
+    <h1>Confirmar Entregas</h1>
+
+    <div class="entrega-card">
+      <div class="entrega-info">
+        <strong>Motorista:</strong> João Silva<br />
+        <strong>Origem:</strong> Fazenda Campo Verde - GO<br />
+        <strong>Destino:</strong> Frigorífico RioSul - SP<br />
+        <strong>Placa:</strong> XYZ-1234<br />
+        <strong>Data da Entrega:</strong> 28/05/2025 - 16:00
+      </div>
+      <button class="btn-confirmar" onclick="alert('Entrega confirmada para João Silva!')">Confirmar</button>
+    </div>
+
+    <div class="entrega-card">
+      <div class="entrega-info">
+        <strong>Motorista:</strong> Ana Martins<br />
+        <strong>Origem:</strong> Fazenda Boa Esperança - MT<br />
+        <strong>Destino:</strong> Frigorífico ValeSul - PR<br />
+        <strong>Placa:</strong> ABC-9876<br />
+        <strong>Data da Entrega:</strong> 28/05/2025 - 14:00
+      </div>
+      <button class="btn-confirmar" onclick="alert('Entrega confirmada para Ana Martins!')">Confirmar</button>
+    </div>
+
+    <a href="dashboard-transportadora.html" class="back-link">Voltar ao Dashboard</a>
+  </div>
+</body>
+</html>

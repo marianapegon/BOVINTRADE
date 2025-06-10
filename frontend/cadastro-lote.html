@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cadastro de Lote - BovinTrade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #dedbd2;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 60px;
+      box-sizing: border-box;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .container {
+      background: #fff;
+      border: 1px solid #dedbd2;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      padding: 2.5rem 3rem;
+      width: 100%;
+      max-width: 900px;
+      box-sizing: border-box;
+      text-align: left;
+    }
+
+    h1 {
+      font-family: 'Lora', serif;
+      color: #8B0000;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    p.description {
+      font-size: 1.05rem;
+      color: #444;
+      margin-bottom: 2rem;
+      max-width: 700px;
+      line-height: 1.4;
+    }
+    
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 35px; /* mais espaço entre os campos */
+}
+
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #222;
+      font-size: 1rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid #dedbd2;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: #8B0000;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-group {
+      flex: 1 1 45%;
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group.description-group {
+      flex: 1 1 100%;
+      min-width: 100%;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      padding: 14px;
+      background-color: transparent;
+      color: #000;
+      border: 2px solid #8B0000;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 200px;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    button:hover {
+      background-color: #8B0000;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Cadastro de Lote de Bois</h1>
+    <p class="description">
+      Cadastre um lote de bois com as informações necessárias para facilitar o controle e a comercialização.
+    </p>
+
+    <form action="#" method="POST">
+      <div class="form-group">
+        <label for="quantidade">Quantidade *</label>
+        <input type="number" id="quantidade" name="quantidade" min="1" required />
+      </div>
+
+      <div class="form-group">
+        <label for="pesoMedio">Peso Médio (kg) *</label>
+        <input type="number" id="pesoMedio" name="pesoMedio" step="0.1" min="0" required />
+      </div>
+
+      <div class="form-group">
+        <label for="raca">Raça *</label>
+        <input type="text" id="raca" name="raca" required />
+      </div>
+
+      <div class="form-group">
+        <label for="preco">Preço por animal (R$) *</label>
+        <input type="number" id="preco" name="preco" step="0.01" min="0" required />
+      </div>
+
+      <div class="form-group">
+        <label for="historicoVacina">Histórico de Vacinação *</label>
+        <textarea id="historicoVacina" name="historicoVacina" placeholder="Descreva as vacinas aplicadas..." required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="tipoAlimentacao">Tipo de Alimentação *</label>
+        <select id="tipoAlimentacao" name="tipoAlimentacao" required>
+          <option value="" disabled selected>Selecione</option>
+          <option value="pastagem">Pastagem</option>
+          <option value="confinamento">Confinamento</option>
+          <option value="sistema-integrado">Sistema Integrado</option>
+          <option value="outro">Outro</option>
+        </select>
+      </div>
+
+      <div class="form-group description-group">
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao" name="descricao" placeholder="Informações adicionais sobre o lote..."></textarea>
+      </div>
+
+      <button type="submit">Cadastrar Lote</button>
+    </form>
+  </div>
+</body>
+</html>

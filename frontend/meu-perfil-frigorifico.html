@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfil - Frigorífico</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #f2f1ee, #e8e6e1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .profile-container {
+      background: #fff;
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      width: 420px;
+      border: 1px solid #dedbd2;
+    }
+
+    .profile-container h1 {
+      font-family: 'Lora', serif;
+      color: #8B0000;
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .profile-field {
+      margin-bottom: 1rem;
+    }
+
+    .profile-field label {
+      font-weight: 600;
+      color: #333;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .profile-field input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      background-color: #f9f9f9;
+    }
+
+    .profile-actions {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .profile-actions a {
+      flex: 1;
+      text-align: center;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 500;
+      font-family: 'Poppins', sans-serif;
+      text-decoration: none;
+      border: 2px solid #8B0000;
+      color: #000;
+      background-color: transparent;
+      transition: all 0.3s ease;
+    }
+
+    .profile-actions a:hover {
+      background-color: #8B0000;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-container">
+    <h1>Meu Perfil - Frigorífico</h1>
+
+    <div class="profile-field">
+      <label for="nome">Nome da Empresa</label>
+      <input type="text" id="nome" value="Frigorífico Boa Carne" readonly />
+    </div>
+
+    <div class="profile-field">
+      <label for="cnpj">CNPJ</label>
+      <input type="text" id="cnpj" value="12.345.678/0001-90" readonly />
+    </div>
+
+    <div class="profile-field">
+      <label for="endereco">Endereço</label>
+      <input type="text" id="endereco" value="Rua das Indústrias, 1000 - Centro, Ourinhos/SP" readonly />
+    </div>
+
+    <div class="profile-field">
+      <label for="email">E-mail</label>
+      <input type="email" id="email" value="contato@boacarne.com.br" readonly />
+    </div>
+
+    <div class="profile-field">
+      <label for="telefone">Telefone</label>
+      <input type="text" id="telefone" value="(14) 99888-7766" readonly />
+    </div>
+
+    <div class="profile-actions">
+      <a href="#">Editar Dados</a>
+      <a href="dashboard-frigorifico.html">Voltar</a>
+    </div>
+  </div>
+</body>
+</html>

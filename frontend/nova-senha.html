@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nova senha - BovinTrade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #f2f1ee, #e8e6e1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      width: 360px;
+      text-align: center;
+      border: 1px solid #dedbd2;
+    }
+    h1 {
+      font-family: 'Lora', serif;
+      color: #8B0000;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      font-size: 1.9rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    label {
+      font-weight: 500;
+      text-align: left;
+      font-size: 0.95rem;
+      color: #3d3d3d;
+    }
+    input[type="password"] {
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-family: 'Poppins', sans-serif;
+      transition: border-color 0.3s;
+    }
+    input[type="password"]:focus {
+      border-color: #8B0000;
+      outline: none;
+    }
+    button {
+      background-color: transparent;
+      color: #000;
+      border: 2px solid #8B0000;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 400;
+      font-size: 0.95rem;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+    button:hover {
+      background-color: #8B0000;
+      color: #fff;
+    }
+    .back-login {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+    }
+    .back-login a {
+      color: #555;
+      text-decoration: none;
+    }
+    .back-login a:hover {
+      text-decoration: underline;
+      color: #8B0000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Nova senha</h1>
+    <form id="nova-senha-form">
+      <label for="senha">Digite sua nova senha</label>
+      <input type="password" id="senha" required />
+      <label for="confirmarSenha">Confirme sua nova senha</label>
+      <input type="password" id="confirmarSenha" required />
+      <button type="submit">Salvar</button>
+    </form>
+    <div class="back-login">
+      <a href="index.html">Voltar ao login</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carrinho de Compras - BovinTrade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #dedbd2;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 60px;
+      box-sizing: border-box;
+      min-height: 100vh;
+      width: 100vw;
+    }
+
+    .container {
+      background: #fff;
+      border: 1px solid #dedbd2;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      padding: 2.5rem 3rem;
+      width: 100%;
+      max-width: 900px;
+      box-sizing: border-box;
+      text-align: left;
+    }
+
+    h1 {
+      font-family: 'Lora', serif;
+      color: #8B0000;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 10px;
+      margin-bottom: 2rem;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      font-size: 1rem;
+      vertical-align: middle;
+    }
+
+    th {
+      font-weight: 600;
+      border-bottom: 2px solid #dedbd2;
+      color: #333;
+    }
+
+    tbody tr {
+      background: #fafafa;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    tbody tr td {
+      border-bottom: none;
+    }
+
+    input[type="number"] {
+      width: 60px;
+      padding: 6px 8px;
+      border: 1.5px solid #dedbd2;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #8B0000;
+    }
+
+    button.remove-btn {
+      background: transparent;
+      border: none;
+      color: #8B0000;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.9rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+
+    button.remove-btn:hover {
+      background-color: #8B0000;
+      color: #fff;
+    }
+
+    .total {
+      font-weight: 700;
+      font-size: 1.2rem;
+      text-align: right;
+      margin-bottom: 2rem;
+      color: #222;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #222;
+      margin-bottom: 0.4rem;
+    }
+
+    select {
+      width: 200px;
+      padding: 10px 12px;
+      border: 1.5px solid #dedbd2;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      transition: border-color 0.3s ease;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: #8B0000;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      max-width: 320px;
+    }
+
+    button.submit-btn {
+      margin-top: 1rem;
+      padding: 14px;
+      background-color: transparent;
+      color: #000;
+      border: 2px solid #8B0000;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 220px;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      align-self: flex-start;
+    }
+
+    button.submit-btn:hover {
+      background-color: #8B0000;
+      color: #fff;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Carrinho de Compras</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Lote</th>
+          <th>Quantidade</th>
+          <th>Preço Unitário (R$)</th>
+          <th>Subtotal (R$)</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Raça Angus - Pastagem</td>
+          <td><input type="number" min="1" value="3" /></td>
+          <td>1.200,00</td>
+          <td>3.600,00</td>
+          <td><button class="remove-btn">Remover</button></td>
+        </tr>
+        <tr>
+          <td>Raça Nelore - Confinamento</td>
+          <td><input type="number" min="1" value="2" /></td>
+          <td>1.000,00</td>
+          <td>2.000,00</td>
+          <td><button class="remove-btn">Remover</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="total">Total: R$ 5.600,00</div>
+
+    <form action="#" method="POST">
+      <div class="form-group">
+        <label for="formaPagamento">Forma de Pagamento *</label>
+        <select id="formaPagamento" name="formaPagamento" required>
+          <option value="" disabled selected>Selecione</option>
+          <option value="pix">Pix</option>
+          <option value="cartao">Cartão de Crédito</option>
+          <option value="deposito">Depósito Bancário</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="dadosFrigorifico">Dados do Frigorífico *</label>
+        <textarea id="dadosFrigorifico" name="dadosFrigorifico" placeholder="Nome, CNPJ, endereço, contato..." rows="4" required style="resize: vertical; padding: 10px; border: 1.5px solid #dedbd2; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 1rem; transition: border-color 0.3s ease;"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Finalizar Compra</button>
+    </form>
+  </div>
+</body>
+</html>

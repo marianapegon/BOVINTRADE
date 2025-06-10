@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lotes Comprados - Frigorífico</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #f2f1ee, #e8e6e1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .lotes-container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      width: 90%;
+      max-width: 900px;
+      border: 1px solid #dedbd2;
+    }
+
+    .lotes-container h1 {
+      font-family: 'Lora', serif;
+      color: #8B0000;
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 12px 10px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #f4f1ec;
+      color: #8B0000;
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 1.5rem;
+      text-decoration: none;
+      border: 2px solid #8B0000;
+      color: #000;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #8B0000;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="lotes-container">
+    <h1>Lotes Comprados</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Lote Nº</th>
+          <th>Origem (Fazenda)</th>
+          <th>Qtd. de Bois</th>
+          <th>Valor Total</th>
+          <th>Data da Compra</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1023</td>
+          <td>Fazenda Campo Verde</td>
+          <td>25</td>
+          <td>R$ 87.500,00</td>
+          <td>15/05/2025</td>
+        </tr>
+        <tr>
+          <td>1017</td>
+          <td>Fazenda Boa Esperança</td>
+          <td>18</td>
+          <td>R$ 63.000,00</td>
+          <td>12/05/2025</td>
+        </tr>
+        <tr>
+          <td>1008</td>
+          <td>Fazenda Nova Vida</td>
+          <td>30</td>
+          <td>R$ 105.000,00</td>
+          <td>05/05/2025</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <a href="dashboard-frigorifico.html" class="back-button">Voltar ao Dashboard</a>
+  </div>
+</body>
+</html>
