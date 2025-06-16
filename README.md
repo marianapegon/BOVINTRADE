@@ -10,7 +10,7 @@ Desenvolver um sistema digital que modernize e agilize a comercialização de ga
 ## 🛠️ Tecnologias Utilizadas
 
 - **Frontend:** HTML, CSS, JavaScript  
-- **Backend:** Java, JavaScript  
+- **Backend:** Java
 - **Banco de Dados:** SQL  
 
 ---
