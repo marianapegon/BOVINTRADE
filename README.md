@@ -1,7 +1,8 @@
 
 ## 📌 Visão Geral
 
-Projeto em desenvolvimento com foco na criação e gerenciamento de documentos e apresentações. A proposta abrange uma solução completa, com frontend, backend e banco de dados integrados para uma experiência eficaz e dinâmica.
+Desenvolver um sistema digital que modernize e agilize a comercialização de gado, reduzindo custos e aumentando a transparência das transações. Além disso, visa facilitar a logística e o planejamento das compras.
+
 
 ---
 
