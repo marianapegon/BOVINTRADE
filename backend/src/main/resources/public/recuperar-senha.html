@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Recuperar Senha - BovinTrade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #f2f1ee, #e8e6e1);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: #000000;
+      padding: 0;
+    }
+
+    .recovery-container {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      width: 100%;
+      max-width: 450px;
+      margin: auto;
+      padding: 2.5rem;
+      border: 1px solid #dedbd2;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .recovery-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .recovery-header h1 {
+      font-family: 'Lora', serif;
+      color: #8B0000;
+      font-weight: 700;
+      font-size: 2.2rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: #000000;
+    }
+
+    input {
+      font-family: 'Poppins', sans-serif;
+      padding: 12px 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+      width: 100%;
+      color: #000000;
+    }
+
+    input:focus {
+      border-color: #8B0000;
+      outline: none;
+    }
+
+    button {
+      font-family: 'Poppins', sans-serif;
+      background-color: transparent;
+      color: #000000;
+      border: 2px solid #8B0000;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+
+    button:hover {
+      background-color: #8B0000;
+      color: #ffffff;
+    }
+
+    .back-link {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .back-link a {
+      color: #8B0000;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      body {
+        padding: 0;
+        background: #fff;
+      }
+      
+      .recovery-container {
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+        min-height: 100vh;
+        padding: 2rem 1.5rem;
+        justify-content: center;
+      }
+      
+      .recovery-header h1 {
+        font-size: 2rem;
+      }
+      
+      input {
+        padding: 10px 12px;
+      }
+      
+      button {
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="recovery-container">
+    <div class="recovery-header">
+      <h1>Recuperar senha</h1>
+    </div>
+
+    <form>
+      <div class="input-group">
+        <label for="email">Informe seu e-mail</label>
+        <input type="email" id="email" name="email" required placeholder="Seu e-mail cadastrado" />
+      </div>
+
+      <button type="submit">Enviar link</button>
+    </form>
+
+    <div class="back-link">
+      <a href="login.html">Voltar ao login</a>
+    </div>
+  </div>
+
+</body>
+</html>

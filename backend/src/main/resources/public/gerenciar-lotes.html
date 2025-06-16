@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>BovinTrade - Gerenciar Lotes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #a30000;
+            --primary-light: #d43b3b;
+            --primary-dark: #7a0000;
+            --secondary: #f8f5f2;
+            --text: #333333;
+            --text-light: #666666;
+            --background: #ffffff;
+            --border: #e0e0e0;
+            --zebra: #f9f9f9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            height: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .user-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            display: flex;
+            min-height: calc(100vh - 76px);
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: var(--background);
+            border-right: 1px solid var(--border);
+            padding: 1.5rem 0;
+        }
+
+        .sidebar-title {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 600;
+            padding: 0 1.5rem 1rem;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .menu-category {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 0.75rem 1.5rem;
+        }
+
+        .menu-item {
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .menu-item:hover,
+        .menu-item.active {
+            background-color: rgba(163, 0, 0, 0.1);
+            color: var(--primary);
+        }
+
+        .main {
+            flex: 1;
+            padding: 2.5rem;
+            background-color: #f9f9f9;
+            overflow-x: auto;
+        }
+
+        .dashboard-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--zebra);
+        }
+
+        .btn-excluir {
+            background-color: transparent;
+            color: #d32f2f;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-excluir:hover {
+            color: #b71c1c;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <a href="02 - painel-fazenda.html" style="text-decoration: none;">🐄</a>
+        <span><a href="02 - painel-fazenda.html" style="color: white; text-decoration: none;">BovinTrade</a></span>
+    </div>
+    <div class="user-menu">
+        <a href="notificacoes-fazenda.html"><i class="fas fa-bell"></i></a>
+        <a href="02 - painel-fazenda.html">Minha Conta</a>
+        <div class="user-avatar"><i class="fas fa-user"></i></div>
+    </div>
+</header>
+
+<div class="container">
+    <aside class="sidebar">
+        <div class="sidebar-title">Menu Principal</div>
+        <ul class="sidebar-menu">
+            <li class="menu-category">Fazenda</li>
+            <a href="02 - painel-fazenda.html" class="menu-item"><i class="fas fa-home"></i><span>Painel da Fazenda</span></a>
+            <a href="03 - cadastro-lote.html" class="menu-item"><i class="fas fa-plus-circle"></i><span>Cadastro de Lotes</span></a>
+            <a href="gerenciar-lotes.html" class="menu-item active"><i class="fas fa-pencil"></i><span>Gerenciar Lotes</span></a>
+            <a href="04 - agendar-retirada.html" class="menu-item"><i class="fas fa-calendar-check"></i><span>Agendamento de Retirada</span></a>
+            <a href="05 - historico-vendas.html" class="menu-item"><i class="fas fa-history"></i><span>Histórico de Vendas</span></a>
+            <a href="06 - historico-pgtorec.html" class="menu-item"><i class="fas fa-money-bill-wave"></i><span>Pagamentos Recebidos</span></a>
+            <a href="08 - pagamentofeito.html" class="menu-item"><i class="fas fa-truck"></i><span>Pagamento Transportadora</span></a>
+            <a href="07 - avaliar-comprador.html" class="menu-item"><i class="fas fa-star"></i><span>Avaliar Comprador</span></a>
+            <a href="01 - meu-perfil-fazenda.html" class="menu-item"><i class="fas fa-user-cog"></i><span>Meu Perfil</span></a>
+            <a href="notificacoes-fazenda.html" class="menu-item"><i class="fas fa-bell"></i><span>Notificações</span></a>
+            <a href="../cadastro/login.html" class="menu-item"><i class="fas fa-sign-out-alt"></i><span>Sair</span></a>
+        </ul>
+    </aside>
+
+    <main class="main">
+        <h1 class="dashboard-title">Lotes Cadastrados</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Raça</th>
+                <th>Quantidade</th>
+                <th>Peso Médio</th>
+                <th>Alimentação</th>
+                <th>Vacinação</th>
+                <th>Preço</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody id="tabelaLotes">
+            <!-- Conteúdo JS -->
+            </tbody>
+        </table>
+    </main>
+</div>
+
+<script>
+    const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+    const fazendaId = usuario?.id;
+
+    if (!usuario || usuario.tipo !== "FAZENDA") {
+        alert("Sessão expirada. Faça login novamente.");
+        window.location.href = "login.html";
+    }
+
+    fetch("http://localhost:8080/lotes")
+        .then(response => response.json())
+        .then(dados => {
+            const tbody = document.getElementById("tabelaLotes");
+            tbody.innerHTML = "";
+
+            dados.forEach(lote => {
+                if (lote.fazenda?.id == fazendaId) {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+            <td>${lote.id}</td>
+            <td>${lote.raca}</td>
+            <td>${lote.quantidade}</td>
+            <td>${lote.pesoMedio} kg</td>
+            <td>${lote.alimentacao}</td>
+            <td>${lote.historicoVacinacao}</td>
+            <td>R$ ${lote.preco.toFixed(2)}</td>
+            <td>${lote.status}</td>
+            <td><button class="btn-excluir" onclick="excluirLote(${lote.id})">Excluir</button></td>
+          `;
+                    tbody.appendChild(row);
+                }
+            });
+        })
+        .catch(() => {
+            alert("Erro ao carregar lotes.");
+        });
+
+    function excluirLote(id) {
+        if (confirm("Deseja excluir este lote?")) {
+            fetch(`http://localhost:8080/lotes/${id}`, { method: "DELETE" })
+                .then(res => {
+                    if (res.ok) {
+                        alert("Lote excluído com sucesso.");
+                        location.reload();
+                    } else {
+                        alert("Erro ao excluir lote.");
+                    }
+                })
+                .catch(() => alert("Erro de conexão."));
+        }
+    }
+</script>
+</body>
+</html>
