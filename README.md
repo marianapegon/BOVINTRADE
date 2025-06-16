@@ -21,4 +21,4 @@ Desenvolver um sistema digital que modernize e agilize a comercialização de ga
 
 ---
 
-> ✨ *Este repositório está em desenvolvimento.*
+> ✨ *Este projeto está em desenvolvimento.*
