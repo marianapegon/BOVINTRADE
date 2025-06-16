@@ -1,6 +1,3 @@
-# 📄 Projeto de Gerenciamento de Documentos e Apresentações
-
-**Status:** 🚧 *Desenvolvimento ativo com melhorias contínuas*
 
 ## 📌 Visão Geral
 
