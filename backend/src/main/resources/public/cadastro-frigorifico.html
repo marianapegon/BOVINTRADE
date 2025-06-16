@@ -221,17 +221,17 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(dados)
     })
-            .then(response => {
-              if (response.ok) {
-                alert('Cadastro realizado com sucesso!');
-                window.location.href = 'login.html';
-              } else {
-                alert('Erro no cadastro. Verifique os dados.');
-              }
-            })
-            .catch(() => {
-              alert('Erro ao conectar com o servidor.');
-            });
+    .then(response => {
+      if (response.ok) {
+        alert('Cadastro realizado com sucesso!');
+        window.location.href = 'login.html';
+      } else {
+        alert('Erro no cadastro. Verifique os dados.');
+      }
+    })
+    .catch(() => {
+      alert('Erro ao conectar com o servidor.');
+    });
   });
 </script>
 

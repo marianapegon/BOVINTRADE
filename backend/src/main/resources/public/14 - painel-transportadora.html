@@ -578,338 +578,339 @@
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo"><a href="14 - painel-transportadora.html" style="color: white; text-decoration: none;"> 🐄 <!-- Emoji de vaca -->
-      <span>BovinTrade</a></span>
-    </div>
-    <div class="user-menu">
-      <a href="notificacoes-transportadora.html"><i class="fas fa-bell"></i></a>
-
-      <a href="meu-perfil-transportadora.html">Minha Conta</a>
-      <div class="user-avatar">
-        <i class="fas fa-user"></i>
-      </div>
-    </div>
-  </header>
-
-  <div class="container">
-    <aside class="sidebar">
-      <div class="sidebar-header">
-        <div class="sidebar-title">Menu Principal</div>
-      </div>
-      
-      <ul class="sidebar-menu">
-        <li class="menu-category">Transportadora</li>
-        <a href="14 - painel-transportadora.html" class="menu-item active">
-          <i class="fas fa-truck"></i>
-          <span>Painel da Transportadora</span>
-        </a>
-        <a href="15 - validacaoretirada.html" class="menu-item">
-          <i class="fas fa-clipboard-check"></i>
-          <span>Validação de Retirada</span>
-        </a>
-        <a href="16 - confirmacaoentrega.html" class="menu-item">
-          <i class="fas fa-check-circle"></i>
-          <span>Confirmação de Entrega</span>
-        </a>
-        <a href="17 - historicotransporte.html" class="menu-item">
-          <i class="fas fa-history"></i>
-          <span>Histórico de Transportes</span>
-        </a>
-        <a href="18 - historpgtorectransportadora.html" class="menu-item">
-          <i class="fas fa-money-bill-wave"></i>
-          <span>Histórico de Pagamentos Recebidos</span>
-        </a>
-        <a href="19 - avaliacaotrans.html" class="menu-item">
-          <i class="fas fa-star"></i>
-          <span>Avaliações Recebidas</span>
-        </a>
-                <a href="meu-perfil-transportadora.html" class="menu-item">
-          <i class="fas fa-user"></i>
-          <span>Meu Perfil</span>
-        </a>
-          <a href="notificacoes-transportadora.html" class="menu-item">
-          <i class="fas fa-bell"></i>
-          <span>Notificações</span>
-        </a>
-        <a href="index.html" class="menu-item">
-          <i class="fas fa-sign-out-alt"></i>
-          <span>Sair</span>
-        </a>
-        
-        <li class="menu-category">Frota</li>
-        <a href="20 - gerenciarfrota.html" class="menu-item">
-          <i class="fas fa-truck-moving"></i>
-          <span>Gerenciar Frota</span>
-        </a>
-        <a href="21 - gerenciarmotorista.html" class="menu-item">
-          <i class="fas fa-user-tie"></i>
-          <span>Gerenciar Motoristas</span>
-        </a>
-        <a href="22 - agendatransportes.html" class="menu-item">
-          <i class="fas fa-calendar-alt"></i>
-          <span>Agenda de Transportes</span>
-        </a>
-      </ul>
-    </aside>
-
-    <main class="main">
-      <div class="dashboard-header">
-        <h1 class="dashboard-title">Painel da Transportadora</h1>
-        <div class="dashboard-actions">
-          <button class="btn btn-outline">
-            <i class="fas fa-download"></i> Relatório
-          </button>
-          <button class="btn btn-primary">
-            <i class="fas fa-plus"></i><a href="20 - gerenciarfrota.html" style="color: white; text-decoration: none;"> Novo Veículo </a>
-          </button>
-        </div>
-      </div>
-
-      <div class="welcome-card">
-        <h2 class="welcome-title">Bem-vindo!</h2>
-        <p class="welcome-text">Acompanhe seus transportes agendados, confirmações pendentes e atividades recentes. Você tem 5 transportes agendados para hoje e 3 confirmações de entrega pendentes.</p>
-      </div>
-
-      <div class="quick-actions">
-        <div class="action-card">
-          <h3 class="action-title"><i class="fas fa-clipboard-check"></i> Validar Retiradas</h3>
-          <p class="action-text">Confirme a retirada dos animais nas fazendas conforme agendado.</p>
-          <button class="btn btn-primary btn-sm"><a href="15 - validacaoretirada.html" style="color: white; text-decoration: none;">Validar</a></button>
-        </div>
-        
-        <div class="action-card">
-          <h3 class="action-title"><i class="fas fa-check-circle"></i> Confirmar Entregas</h3>
-          <p class="action-text">Registre a conclusão dos transportes nos frigoríficos.</p>
-          <button class="btn btn-primary btn-sm"><a href="16 - confirmacaoentrega.html" style="color: white; text-decoration: none;"> Confirmar</a></button>
-        </div>
-        
-        <div class="action-card">
-          <h3 class="action-title"><i class="fas fa-truck-moving"></i> Gerenciar Frota</h3>
-          <p class="action-text">Adicione veículos ou mantenha o cadastro da sua frota atualizado.</p>
-          <button class="btn btn-primary btn-sm"><a href="20 - gerenciarfrota.html" style="color: white; text-decoration: none;">  Gerenciar </a></button>
-        </div>
-      </div>
-
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-title"><i class="fas fa-truck"></i> Transportes Hoje</div>
-          <div class="stat-value">5</div>
-          <div class="stat-change up">
-            <i class="fas fa-arrow-up"></i> 2 a mais que ontem
-          </div>
-        </div>
-        
-        <div class="stat-card">
-          <div class="stat-title"><i class="fas fa-clock"></i> Pendentes de Confirmação</div>
-          <div class="stat-value">3</div>
-          <div class="stat-change down">
-            <i class="fas fa-arrow-down"></i> 1 a menos que ontem
-          </div>
-        </div>
-        
-        <div class="stat-card">
-          <div class="stat-title"><i class="fas fa-calendar-week"></i> Transportes Esta Semana</div>
-          <div class="stat-value">18</div>
-          <div class="stat-change up">
-            <i class="fas fa-arrow-up"></i> 15% desde a semana passada
-          </div>
-        </div>
-        
-        <div class="stat-card">
-          <div class="stat-title"><i class="fas fa-star"></i> Avaliação Média</div>
-          <div class="stat-value">4.5</div>
-          <div class="stat-change up">
-            <i class="fas fa-arrow-up"></i> 0.1 pontos desde o último mês
-          </div>
-        </div>
-      </div>
-
-      <div class="transports-list">
-        <h2 class="section-title"><i class="fas fa-clipboard-list"></i> Transportes Pendentes</h2>
-        
-        <div class="transport-item">
-          <div class="transport-info">
-            <div class="transport-title">Transporte #TR-7842 - Fazenda Santa Maria → Frigorífico Carnes Nobres</div>
-            <div class="transport-details">
-              <div class="transport-detail">
-                <i class="fas fa-calendar-day"></i>
-                <span>Hoje, 09:00 - 12:00</span>
-              </div>
-              <div class="transport-detail">
-                <i class="fas fa-boxes"></i>
-                <span>3 lotes (24 cabeças)</span>
-              </div>
-              <div class="transport-detail">
-                <i class="fas fa-user"></i>
-                <span>Motorista: João Silva</span>
-              </div>
-            </div>
-          </div>
-          <div class="transport-actions">
-            <button class="btn btn-outline btn-sm">
-              <i class="fas fa-info-circle"></i> Detalhes
-            </button>
-            <button class="btn btn-primary btn-sm">
-              <i class="fas fa-check"></i> Confirmar
-            </button>
-          </div>
-        </div>
-        
-        <div class="transport-item">
-          <div class="transport-info">
-            <div class="transport-title">Transporte #TR-7843 - Fazenda Boi Gordo → Frigorífico Prime Carne</div>
-            <div class="transport-details">
-              <div class="transport-detail">
-                <i class="fas fa-calendar-day"></i>
-                <span>Hoje, 14:00 - 17:00</span>
-              </div>
-              <div class="transport-detail">
-                <i class="fas fa-boxes"></i>
-                <span>2 lotes (18 cabeças)</span>
-              </div>
-              <div class="transport-detail">
-                <i class="fas fa-user"></i>
-                <span>Motorista: Carlos Oliveira</span>
-              </div>
-            </div>
-          </div>
-          <div class="transport-actions">
-            <button class="btn btn-outline btn-sm">
-              <i class="fas fa-info-circle"></i> Detalhes
-            </button>
-            <button class="btn btn-primary btn-sm">
-              <i class="fas fa-check"></i> Confirmar
-            </button>
-          </div>
-        </div>
-        
-        <div class="transport-item">
-          <div class="transport-info">
-            <div class="transport-title">Transporte #TR-7845 - Fazenda Boi Sadio → Frigorífico Carnes Finas</div>
-            <div class="transport-details">
-              <div class="transport-detail">
-                <i class="fas fa-calendar-day"></i>
-                <span>Amanhã, 08:00 - 11:00</span>
-              </div>
-              <div class="transport-detail">
-                <i class="fas fa-boxes"></i>
-                <span>4 lotes (32 cabeças)</span>
-              </div>
-              <div class="transport-detail">
-                <i class="fas fa-user"></i>
-                <span>Motorista: Pedro Santos</span>
-              </div>
-            </div>
-          </div>
-          <div class="transport-actions">
-            <button class="btn btn-outline btn-sm">
-              <i class="fas fa-info-circle"></i> Detalhes
-            </button>
-            <button class="btn btn-primary btn-sm">
-              <i class="fas fa-check"></i> Confirmar
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="recent-activity">
-        <h2 class="section-title"><i class="fas fa-bell"></i> Atividades Recentes</h2>
-        <ul class="activity-list">
-          <li class="activity-item">
-            <div class="activity-icon">
-              <i class="fas fa-check-circle"></i>
-            </div>
-            <div class="activity-content">
-              <div class="activity-title">Transporte #TR-7839 concluído com sucesso</div>
-              <div class="activity-time">Hoje, 13:45</div>
-            </div>
-          </li>
-          <li class="activity-item">
-            <div class="activity-icon">
-              <i class="fas fa-exclamation-triangle"></i>
-            </div>
-            <div class="activity-content">
-              <div class="activity-title">Atraso no transporte #TR-7840 - Problema mecânico</div>
-              <div class="activity-time">Hoje, 10:30</div>
-            </div>
-          </li>
-          <li class="activity-item">
-            <div class="activity-icon">
-              <i class="fas fa-star"></i>
-            </div>
-            <div class="activity-content">
-              <div class="activity-title">Nova avaliação recebida: 4 estrelas</div>
-              <div class="activity-time">Ontem, 18:20</div>
-            </div>
-          </li>
-          <li class="activity-item">
-            <div class="activity-icon">
-              <i class="fas fa-truck"></i>
-            </div>
-            <div class="activity-content">
-              <div class="activity-title">Novo transporte agendado para amanhã - #TR-7845</div>
-              <div class="activity-time">Ontem, 16:15</div>
-            </div>
-          </li>
-          <li class="activity-item">
-            <div class="activity-icon">
-              <i class="fas fa-money-bill-wave"></i>
-            </div>
-            <div class="activity-content">
-              <div class="activity-title">Pagamento recebido por transporte #TR-7832 - R$ 1.850,00</div>
-              <div class="activity-time">Ontem, 09:30</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </main>
+<header>
+  <div class="logo">
+    <a href="14 - painel-transportadora.html" style="color: white; text-decoration: none;"> 🐄 <!-- Emoji de vaca -->
+    <span>BovinTrade</a></span>
   </div>
+  <div class="user-menu">
+    <a href="notificacoes-transportadora.html"><i class="fas fa-bell"></i></a>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const menuItems = document.querySelectorAll('.menu-item');
-      menuItems.forEach(item => {
-        item.addEventListener('click', function () {
-          menuItems.forEach(i => i.classList.remove('active'));
-          this.classList.add('active');
-        });
+    <a href="meu-perfil-transportadora.html">Minha Conta</a>
+    <div class="user-avatar">
+      <i class="fas fa-user"></i>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">Menu Principal</div>
+    </div>
+
+    <ul class="sidebar-menu">
+      <li class="menu-category">Transportadora</li>
+      <a href="14 - painel-transportadora.html" class="menu-item active">
+        <i class="fas fa-truck"></i>
+        <span>Painel da Transportadora</span>
+      </a>
+      <a href="15 - validacaoretirada.html" class="menu-item">
+        <i class="fas fa-clipboard-check"></i>
+        <span>Validação de Retirada</span>
+      </a>
+      <a href="16 - confirmacaoentrega.html" class="menu-item">
+        <i class="fas fa-check-circle"></i>
+        <span>Confirmação de Entrega</span>
+      </a>
+      <a href="17 - historicotransporte.html" class="menu-item">
+        <i class="fas fa-history"></i>
+        <span>Histórico de Transportes</span>
+      </a>
+      <a href="18 - historpgtorectransportadora.html" class="menu-item">
+        <i class="fas fa-money-bill-wave"></i>
+        <span>Histórico de Pagamentos Recebidos</span>
+      </a>
+      <a href="19 - avaliacaotrans.html" class="menu-item">
+        <i class="fas fa-star"></i>
+        <span>Avaliações Recebidas</span>
+      </a>
+      <a href="meu-perfil-transportadora.html" class="menu-item">
+        <i class="fas fa-user"></i>
+        <span>Meu Perfil</span>
+      </a>
+      <a href="notificacoes-transportadora.html" class="menu-item">
+        <i class="fas fa-bell"></i>
+        <span>Notificações</span>
+      </a>
+      <a href="index.html" class="menu-item">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Sair</span>
+      </a>
+
+      <li class="menu-category">Frota</li>
+      <a href="20 - gerenciarfrota.html" class="menu-item">
+        <i class="fas fa-truck-moving"></i>
+        <span>Gerenciar Frota</span>
+      </a>
+      <a href="21 - gerenciarmotorista.html" class="menu-item">
+        <i class="fas fa-user-tie"></i>
+        <span>Gerenciar Motoristas</span>
+      </a>
+      <a href="22 - agendatransportes.html" class="menu-item">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Agenda de Transportes</span>
+      </a>
+    </ul>
+  </aside>
+
+  <main class="main">
+    <div class="dashboard-header">
+      <h1 class="dashboard-title">Painel da Transportadora</h1>
+      <div class="dashboard-actions">
+        <button class="btn btn-outline">
+          <i class="fas fa-download"></i> Relatório
+        </button>
+        <button class="btn btn-primary">
+          <i class="fas fa-plus"></i><a href="20 - gerenciarfrota.html" style="color: white; text-decoration: none;"> Novo Veículo </a>
+        </button>
+      </div>
+    </div>
+
+    <div class="welcome-card">
+      <h2 class="welcome-title">Bem-vindo!</h2>
+      <p class="welcome-text">Acompanhe seus transportes agendados, confirmações pendentes e atividades recentes. Você tem 5 transportes agendados para hoje e 3 confirmações de entrega pendentes.</p>
+    </div>
+
+    <div class="quick-actions">
+      <div class="action-card">
+        <h3 class="action-title"><i class="fas fa-clipboard-check"></i> Validar Retiradas</h3>
+        <p class="action-text">Confirme a retirada dos animais nas fazendas conforme agendado.</p>
+        <button class="btn btn-primary btn-sm"><a href="15 - validacaoretirada.html" style="color: white; text-decoration: none;">Validar</a></button>
+      </div>
+
+      <div class="action-card">
+        <h3 class="action-title"><i class="fas fa-check-circle"></i> Confirmar Entregas</h3>
+        <p class="action-text">Registre a conclusão dos transportes nos frigoríficos.</p>
+        <button class="btn btn-primary btn-sm"><a href="16 - confirmacaoentrega.html" style="color: white; text-decoration: none;"> Confirmar</a></button>
+      </div>
+
+      <div class="action-card">
+        <h3 class="action-title"><i class="fas fa-truck-moving"></i> Gerenciar Frota</h3>
+        <p class="action-text">Adicione veículos ou mantenha o cadastro da sua frota atualizado.</p>
+        <button class="btn btn-primary btn-sm"><a href="20 - gerenciarfrota.html" style="color: white; text-decoration: none;">  Gerenciar </a></button>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-title"><i class="fas fa-truck"></i> Transportes Hoje</div>
+        <div class="stat-value">5</div>
+        <div class="stat-change up">
+          <i class="fas fa-arrow-up"></i> 2 a mais que ontem
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-title"><i class="fas fa-clock"></i> Pendentes de Confirmação</div>
+        <div class="stat-value">3</div>
+        <div class="stat-change down">
+          <i class="fas fa-arrow-down"></i> 1 a menos que ontem
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-title"><i class="fas fa-calendar-week"></i> Transportes Esta Semana</div>
+        <div class="stat-value">18</div>
+        <div class="stat-change up">
+          <i class="fas fa-arrow-up"></i> 15% desde a semana passada
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-title"><i class="fas fa-star"></i> Avaliação Média</div>
+        <div class="stat-value">4.5</div>
+        <div class="stat-change up">
+          <i class="fas fa-arrow-up"></i> 0.1 pontos desde o último mês
+        </div>
+      </div>
+    </div>
+
+    <div class="transports-list">
+      <h2 class="section-title"><i class="fas fa-clipboard-list"></i> Transportes Pendentes</h2>
+
+      <div class="transport-item">
+        <div class="transport-info">
+          <div class="transport-title">Transporte #TR-7842 - Fazenda Santa Maria → Frigorífico Carnes Nobres</div>
+          <div class="transport-details">
+            <div class="transport-detail">
+              <i class="fas fa-calendar-day"></i>
+              <span>Hoje, 09:00 - 12:00</span>
+            </div>
+            <div class="transport-detail">
+              <i class="fas fa-boxes"></i>
+              <span>3 lotes (24 cabeças)</span>
+            </div>
+            <div class="transport-detail">
+              <i class="fas fa-user"></i>
+              <span>Motorista: João Silva</span>
+            </div>
+          </div>
+        </div>
+        <div class="transport-actions">
+          <button class="btn btn-outline btn-sm">
+            <i class="fas fa-info-circle"></i> Detalhes
+          </button>
+          <button class="btn btn-primary btn-sm">
+            <i class="fas fa-check"></i> Confirmar
+          </button>
+        </div>
+      </div>
+
+      <div class="transport-item">
+        <div class="transport-info">
+          <div class="transport-title">Transporte #TR-7843 - Fazenda Boi Gordo → Frigorífico Prime Carne</div>
+          <div class="transport-details">
+            <div class="transport-detail">
+              <i class="fas fa-calendar-day"></i>
+              <span>Hoje, 14:00 - 17:00</span>
+            </div>
+            <div class="transport-detail">
+              <i class="fas fa-boxes"></i>
+              <span>2 lotes (18 cabeças)</span>
+            </div>
+            <div class="transport-detail">
+              <i class="fas fa-user"></i>
+              <span>Motorista: Carlos Oliveira</span>
+            </div>
+          </div>
+        </div>
+        <div class="transport-actions">
+          <button class="btn btn-outline btn-sm">
+            <i class="fas fa-info-circle"></i> Detalhes
+          </button>
+          <button class="btn btn-primary btn-sm">
+            <i class="fas fa-check"></i> Confirmar
+          </button>
+        </div>
+      </div>
+
+      <div class="transport-item">
+        <div class="transport-info">
+          <div class="transport-title">Transporte #TR-7845 - Fazenda Boi Sadio → Frigorífico Carnes Finas</div>
+          <div class="transport-details">
+            <div class="transport-detail">
+              <i class="fas fa-calendar-day"></i>
+              <span>Amanhã, 08:00 - 11:00</span>
+            </div>
+            <div class="transport-detail">
+              <i class="fas fa-boxes"></i>
+              <span>4 lotes (32 cabeças)</span>
+            </div>
+            <div class="transport-detail">
+              <i class="fas fa-user"></i>
+              <span>Motorista: Pedro Santos</span>
+            </div>
+          </div>
+        </div>
+        <div class="transport-actions">
+          <button class="btn btn-outline btn-sm">
+            <i class="fas fa-info-circle"></i> Detalhes
+          </button>
+          <button class="btn btn-primary btn-sm">
+            <i class="fas fa-check"></i> Confirmar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="recent-activity">
+      <h2 class="section-title"><i class="fas fa-bell"></i> Atividades Recentes</h2>
+      <ul class="activity-list">
+        <li class="activity-item">
+          <div class="activity-icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <div class="activity-content">
+            <div class="activity-title">Transporte #TR-7839 concluído com sucesso</div>
+            <div class="activity-time">Hoje, 13:45</div>
+          </div>
+        </li>
+        <li class="activity-item">
+          <div class="activity-icon">
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+          <div class="activity-content">
+            <div class="activity-title">Atraso no transporte #TR-7840 - Problema mecânico</div>
+            <div class="activity-time">Hoje, 10:30</div>
+          </div>
+        </li>
+        <li class="activity-item">
+          <div class="activity-icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <div class="activity-content">
+            <div class="activity-title">Nova avaliação recebida: 4 estrelas</div>
+            <div class="activity-time">Ontem, 18:20</div>
+          </div>
+        </li>
+        <li class="activity-item">
+          <div class="activity-icon">
+            <i class="fas fa-truck"></i>
+          </div>
+          <div class="activity-content">
+            <div class="activity-title">Novo transporte agendado para amanhã - #TR-7845</div>
+            <div class="activity-time">Ontem, 16:15</div>
+          </div>
+        </li>
+        <li class="activity-item">
+          <div class="activity-icon">
+            <i class="fas fa-money-bill-wave"></i>
+          </div>
+          <div class="activity-content">
+            <div class="activity-title">Pagamento recebido por transporte #TR-7832 - R$ 1.850,00</div>
+            <div class="activity-time">Ontem, 09:30</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </main>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const menuItems = document.querySelectorAll('.menu-item');
+    menuItems.forEach(item => {
+      item.addEventListener('click', function () {
+        menuItems.forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
       });
-
-      const sidebar = document.querySelector('.sidebar');
-      if (window.innerWidth <= 1024 && sidebar) {
-        sidebar.classList.add('active');
-      }
-
-      // Validação de login
-      const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
-      const transportadoraId = usuario?.id;
-
-      if (!transportadoraId || usuario?.tipo !== "TRANSPORTADORA") {
-        alert("Sessão expirada. Faça login novamente.");
-        window.location.href = "login.html";
-        return;
-      }
-
-      // Buscar nome da transportadora
-      fetch(`http://localhost:8080/transportadoras/${transportadoraId}`)
-              .then(res => res.json())
-              .then(data => {
-                const welcome = document.querySelector(".welcome-title");
-                if (welcome) {
-                  welcome.innerText = `Bem-vindo, ${data.nome}!`;
-                }
-              })
-              .catch(() => {
-                document.querySelector(".welcome-title").innerText = "Bem-vindo!";
-              });
-
-      // Exemplo: carregar número real de transportes de hoje, etc. (opcional)
-      // fetch(`http://localhost:8080/transportes/transportadora/${transportadoraId}`)
-      //   .then(res => res.json())
-      //   .then(lista => { ... });
     });
-  </script>
+
+    const sidebar = document.querySelector('.sidebar');
+    if (window.innerWidth <= 1024 && sidebar) {
+      sidebar.classList.add('active');
+    }
+
+    // Validação de login
+    const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+    const transportadoraId = usuario?.id;
+
+    if (!transportadoraId || usuario?.tipo !== "TRANSPORTADORA") {
+      alert("Sessão expirada. Faça login novamente.");
+      window.location.href = "login.html";
+      return;
+    }
+
+    // Buscar nome da transportadora
+    fetch(http://localhost:8080/transportadoras/${transportadoraId})
+            .then(res => res.json())
+            .then(data => {
+              const welcome = document.querySelector(".welcome-title");
+              if (welcome) {
+                welcome.innerText = Bem-vindo, ${data.nome}!;
+              }
+            })
+            .catch(() => {
+              document.querySelector(".welcome-title").innerText = "Bem-vindo!";
+            });
+
+    // Exemplo: carregar número real de transportes de hoje, etc. (opcional)
+    // fetch(http://localhost:8080/transportes/transportadora/${transportadoraId})
+    //   .then(res => res.json())
+    //   .then(lista => { ... });
+  });
+</script>
 
 </body>
 </html>
