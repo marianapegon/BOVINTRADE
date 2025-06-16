@@ -642,7 +642,7 @@
     <i class="fas fa-bell"></i></i>
     <span>Notificaçoes</span>
   </a>
-          <a href="../cadastro/login.html" class="menu-item">
+        <a href="index.html" class="menu-item">
           <i class="fas fa-sign-out-alt"></i>
           <span>Sair</span>
         </a>
@@ -663,7 +663,7 @@
       </div>
 
       <div class="welcome-card">
-        <h2 class="welcome-title">Bem-vindo, Frigorífico Carnes Nobres!</h2>
+        <h2 class="welcome-title">Bem-vindo!</h2>
         <p class="welcome-text">Acompanhe seus pedidos, recebimentos e estoque de animais. Você tem 5 novos lotes disponíveis para compra e 3 entregas agendadas para esta semana.</p>
       </div>
 
@@ -849,21 +849,46 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
+      // Menu ativo no clique
       const menuItems = document.querySelectorAll('.menu-item');
-      
       menuItems.forEach(item => {
-        item.addEventListener('click', function() {
+        item.addEventListener('click', function () {
           menuItems.forEach(i => i.classList.remove('active'));
           this.classList.add('active');
         });
       });
-      
+
+      // Mostrar menu lateral em mobile
       const sidebar = document.querySelector('.sidebar');
-      if (window.innerWidth <= 1024) {
+      if (window.innerWidth <= 1024 && sidebar) {
         sidebar.classList.add('active');
       }
+
+      // Validar login e tipo
+      const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+      const frigorificoId = usuario?.id;
+
+      if (!frigorificoId || usuario?.tipo !== "FRIGORIFICO") {
+        alert("Sessão expirada. Faça login novamente.");
+        window.location.href = "login.html";
+        return;
+      }
+
+      // Buscar nome do frigorífico
+      fetch(`http://localhost:8080/frigorificos/${frigorificoId}`)
+              .then(res => res.json())
+              .then(data => {
+                const welcomeEl = document.querySelector(".welcome-title");
+                if (welcomeEl) welcomeEl.innerText = `Bem-vindo, ${data.nome}!`;
+              })
+              .catch(err => {
+                console.error("Erro ao buscar frigorífico:", err);
+              });
+
+      // Se tiver estatísticas, adicione aqui como no painel da fazenda/transportadora
     });
   </script>
+
 </body>
 </html>

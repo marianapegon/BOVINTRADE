@@ -631,8 +631,8 @@
           <a href="notificacoes-transportadora.html" class="menu-item">
           <i class="fas fa-bell"></i>
           <span>Notificações</span>
-        </a>        
-        <a href="../cadastro/login.html" class="menu-item">
+        </a>
+        <a href="index.html" class="menu-item">
           <i class="fas fa-sign-out-alt"></i>
           <span>Sair</span>
         </a>
@@ -667,7 +667,7 @@
       </div>
 
       <div class="welcome-card">
-        <h2 class="welcome-title">Bem-vindo, Transportadora Expresso Boi!</h2>
+        <h2 class="welcome-title">Bem-vindo!</h2>
         <p class="welcome-text">Acompanhe seus transportes agendados, confirmações pendentes e atividades recentes. Você tem 5 transportes agendados para hoje e 3 confirmações de entrega pendentes.</p>
       </div>
 
@@ -867,21 +867,49 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const menuItems = document.querySelectorAll('.menu-item');
-      
       menuItems.forEach(item => {
-        item.addEventListener('click', function() {
+        item.addEventListener('click', function () {
           menuItems.forEach(i => i.classList.remove('active'));
           this.classList.add('active');
         });
       });
-      
+
       const sidebar = document.querySelector('.sidebar');
-      if (window.innerWidth <= 1024) {
+      if (window.innerWidth <= 1024 && sidebar) {
         sidebar.classList.add('active');
       }
+
+      // Validação de login
+      const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+      const transportadoraId = usuario?.id;
+
+      if (!transportadoraId || usuario?.tipo !== "TRANSPORTADORA") {
+        alert("Sessão expirada. Faça login novamente.");
+        window.location.href = "login.html";
+        return;
+      }
+
+      // Buscar nome da transportadora
+      fetch(`http://localhost:8080/transportadoras/${transportadoraId}`)
+              .then(res => res.json())
+              .then(data => {
+                const welcome = document.querySelector(".welcome-title");
+                if (welcome) {
+                  welcome.innerText = `Bem-vindo, ${data.nome}!`;
+                }
+              })
+              .catch(() => {
+                document.querySelector(".welcome-title").innerText = "Bem-vindo!";
+              });
+
+      // Exemplo: carregar número real de transportes de hoje, etc. (opcional)
+      // fetch(`http://localhost:8080/transportes/transportadora/${transportadoraId}`)
+      //   .then(res => res.json())
+      //   .then(lista => { ... });
     });
   </script>
+
 </body>
 </html>

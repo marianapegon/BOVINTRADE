@@ -6,242 +6,181 @@
   <title>Cadastro Transportadora - BovinTrade</title>
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(to bottom, #f2f1ee, #e8e6e1);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      color: #000000;
-      padding: 0;
+      min-height: 100vh; display: flex; flex-direction: column; color: #000;
     }
-
     .cadastro-container {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-      width: 100%;
-      max-width: 600px;
-      margin: 2rem auto;
-      padding: 2rem;
-      border: 1px solid #dedbd2;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
+      background: #fff; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      width: 100%; max-width: 600px; margin: 2rem auto; padding: 2rem;
+      border: 1px solid #dedbd2; flex-grow: 1; display: flex; flex-direction: column;
     }
-
     .cadastro-container h1 {
-      font-family: 'Lora', serif;
-      color: #8B0000;
-      font-weight: 700;
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      text-align: center;
+      font-family: 'Lora', serif; color: #8B0000; font-weight: 700;
+      font-size: 2rem; margin-bottom: 1.5rem; text-align: center;
     }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      flex-grow: 1;
-    }
-
-    .form-content {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      flex-grow: 1;
-    }
-
+    form { display: flex; flex-direction: column; gap: 1rem; flex-grow: 1; }
+    .form-content { display: flex; flex-direction: column; gap: 1rem; flex-grow: 1; }
     label {
-      font-family: 'Lora', serif;
-      font-weight: 500;
-      font-size: 0.95rem;
-      color: #000000;
-      margin-bottom: 0.3rem;
-      display: block;
+      font-family: 'Lora', serif; font-weight: 500; font-size: 0.95rem;
+      color: #000; margin-bottom: 0.3rem; display: block;
     }
-
     input, select, textarea {
-      font-family: 'Poppins', sans-serif;
-      padding: 12px 14px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: border-color 0.3s;
-      width: 100%;
-      color: #000000;
+      font-family: 'Poppins', sans-serif; padding: 12px 14px; border: 1px solid #ccc;
+      border-radius: 8px; font-size: 1rem; transition: border-color 0.3s; width: 100%; color: #000;
     }
-
-    input:focus, select:focus, textarea:focus {
-      border-color: #8B0000;
-      outline: none;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
+    input:focus, select:focus, textarea:focus { border-color: #8B0000; outline: none; }
+    textarea { resize: vertical; min-height: 100px; }
     button {
-      font-family: 'Poppins', sans-serif;
-      background-color: transparent;
-      color: #000000;
-      border: 2px solid #8B0000;
-      padding: 14px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 1.1rem;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      margin-top: auto;
+      font-family: 'Poppins', sans-serif; background: transparent; color: #000;
+      border: 2px solid #8B0000; padding: 14px; border-radius: 8px; font-weight: 600;
+      font-size: 1.1rem; transition: all 0.3s ease; cursor: pointer; margin-top: auto;
     }
-
-    button:hover {
-      background-color: #8B0000;
-      color: #ffffff;
-    }
-
-    .link-login {
-      margin-top: 1.5rem;
-      font-size: 0.95rem;
-      text-align: center;
-    }
-
-    .link-login a {
-      color: #8B0000;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .link-login a:hover {
-      text-decoration: underline;
-    }
-
-    /* Responsividade melhorada */
+    button:hover { background: #8B0000; color: #fff; }
+    .link-login { margin-top: 1.5rem; font-size: 0.95rem; text-align: center; }
+    .link-login a { color: #8B0000; text-decoration: none; font-weight: 600; }
+    .link-login a:hover { text-decoration: underline; }
     @media (max-width: 768px) {
-      body {
-        padding: 0;
-        background: #fff;
-      }
-      
-      .cadastro-container {
-        border-radius: 0;
-        box-shadow: none;
-        border: none;
-        margin: 0;
-        padding: 1.5rem;
-        min-height: 100vh;
-      }
-      
-      form {
-        gap: 0.8rem;
-      }
-      
-      input, select, textarea {
-        padding: 10px 12px;
-        font-size: 0.95rem;
-      }
-      
-      button {
-        padding: 12px;
-        font-size: 1rem;
-      }
+      body { background: #fff; }
+      .cadastro-container { border-radius: 0; box-shadow: none; border: none; margin: 0; padding: 1.5rem; min-height: 100vh; }
+      form { gap: 0.8rem; }
+      input, select, textarea { padding: 10px 12px; font-size: 0.95rem; }
+      button { padding: 12px; font-size: 1rem; }
     }
-
-    @media (min-width: 769px) {
-      body {
-        padding: 2rem 1rem;
-      }
-    }
+    @media (min-width: 769px) { body { padding: 2rem 1rem; } }
   </style>
 </head>
 <body>
 
-  <div class="cadastro-container">
-    <h1>Cadastro transportadora</h1>
-    <form>
-      <div class="form-content">
-        <label for="razao-social">Razão Social / Nome do Motorista Autônomo*</label>
-        <input type="text" id="razao-social" name="razao-social" required placeholder="Nome completo ou razão social" />
+<div class="cadastro-container">
+  <h1>Cadastro Transportadora</h1>
+  <form id="formCadastro">
+    <div class="form-content">
+      <label for="razao-social">Razão Social / Nome do Motorista Autônomo*</label>
+      <input type="text" id="razao-social" name="razao-social" required placeholder="Nome completo ou razão social" />
 
-        <label for="tipo-transportador">Tipo de Transportador*</label>
-        <select id="tipo-transportador" name="tipo-transportador" required>
-          <option value="" disabled selected>Selecione</option>
-          <option value="autonomo">Motorista Autônomo</option>
-          <option value="transportadora">Transportadora</option>
-        </select>
+      <label for="tipo-transportador">Tipo de Transportador*</label>
+      <select id="tipo-transportador" name="tipo-transportador" required>
+        <option value="" disabled selected>Selecione</option>
+        <option value="autonomo">Motorista Autônomo</option>
+        <option value="transportadora">Transportadora</option>
+      </select>
 
-        <label for="documento">CPF (PF) ou CNPJ (PJ)*</label>
-        <input type="text" id="documento" name="documento" required placeholder="CPF ou CNPJ" />
+      <label for="documento">CPF (PF) ou CNPJ (PJ)*</label>
+      <input type="text" id="documento" name="documento" required placeholder="CPF ou CNPJ" />
 
-        <label for="cnh">CNH do(s) Motorista(s)*</label>
-        <input type="text" id="cnh" name="cnh" required placeholder="Número da CNH" />
+      <label for="cnh">CNH do(s) Motorista(s)*</label>
+      <input type="text" id="cnh" name="cnh" required placeholder="Número da CNH" />
 
-        <label for="placas">Placa(s) do(s) Veículo(s)*</label>
-        <input type="text" id="placas" name="placas" required placeholder="Ex: ABC1D23, XYZ9A88" />
+      <label for="placas">Placa(s) do(s) Veículo(s)*</label>
+      <input type="text" id="placas" name="placas" required placeholder="Ex: ABC1D23, XYZ9A88" />
 
-        <label for="tipo-veiculo">Tipo de Veículo*</label>
-        <input type="text" id="tipo-veiculo" name="tipo-veiculo" required placeholder="Ex: boiadeiro, carreta" />
+      <label for="tipo-veiculo">Tipo de Veículo*</label>
+      <input type="text" id="tipo-veiculo" name="tipo-veiculo" required placeholder="Ex: boiadeiro, carreta" />
 
-        <label for="capacidade-min">Capacidade Mínima (número de bois)*</label>
-        <input type="number" id="capacidade-min" name="capacidade-min" required placeholder="Ex: 10" min="1" />
+      <label for="capacidade-min">Capacidade Mínima (número de bois)*</label>
+      <input type="number" id="capacidade-min" name="capacidade-min" required placeholder="Ex: 10" min="1" />
 
-        <label for="capacidade-max">Capacidade Máxima (número de bois)*</label>
-        <input type="number" id="capacidade-max" name="capacidade-max" required placeholder="Ex: 30" min="1" />
+      <label for="capacidade-max">Capacidade Máxima (número de bois)*</label>
+      <input type="number" id="capacidade-max" name="capacidade-max" required placeholder="Ex: 30" min="1" />
 
-        <label for="cep">CEP*</label>
-        <input type="text" id="cep" name="cep" required placeholder="00000-000" pattern="\d{5}-?\d{3}" title="Formato: 00000-000" />
+      <label for="cep">CEP*</label>
+      <input type="text" id="cep" name="cep" required placeholder="00000-000"
+             pattern="\d{5}-?\d{3}" title="Formato: 00000-000" />
 
-        <label for="cidade">Cidade*</label>
-        <input type="text" id="cidade" name="cidade" required placeholder="Cidade" />
+      <label for="cidade">Cidade*</label>
+      <input type="text" id="cidade" name="cidade" required placeholder="Cidade" />
 
-        <label for="estado">Estado*</label>
-        <select id="estado" name="estado" required>
-          <option value="" disabled selected>Selecione o estado</option>
-          <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option><option value="AM">AM</option>
-          <option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option>
-          <option value="GO">GO</option><option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option>
-          <option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option><option value="PR">PR</option>
-          <option value="PE">PE</option><option value="PI">PI</option><option value="RJ">RJ</option><option value="RN">RN</option>
-          <option value="RS">RS</option><option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option>
-          <option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option>
-        </select>
+      <label for="estado">Estado*</label>
+      <select id="estado" name="estado" required>
+        <option value="" disabled selected>Selecione o estado</option>
+        <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option><option value="AM">AM</option>
+        <option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option>
+        <option value="GO">GO</option><option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option>
+        <option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option><option value="PR">PR</option>
+        <option value="PE">PE</option><option value="PI">PI</option><option value="RJ">RJ</option><option value="RN">RN</option>
+        <option value="RS">RS</option><option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option>
+        <option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option>
+      </select>
 
-        <label for="bairro">Bairro*</label>
-        <input type="text" id="bairro" name="bairro" required placeholder="Bairro" />
+      <label for="bairro">Bairro*</label>
+      <input type="text" id="bairro" name="bairro" required placeholder="Bairro" />
 
-        <label for="rua">Rua*</label>
-        <input type="text" id="rua" name="rua" required placeholder="Rua" />
+      <label for="rua">Rua*</label>
+      <input type="text" id="rua" name="rua" required placeholder="Rua" />
 
-        <label for="numero">Número*</label>
-        <input type="text" id="numero" name="numero" required placeholder="Número" />
+      <label for="numero">Número*</label>
+      <input type="text" id="numero" name="numero" required placeholder="Número" />
 
-        <label for="complemento">Complemento</label>
-        <input type="text" id="complemento" name="complemento" placeholder="Complemento (opcional)" />
+      <label for="complemento">Complemento</label>
+      <input type="text" id="complemento" name="complemento" placeholder="Complemento (opcional)" />
 
-        <label for="email">E-mail*</label>
-        <input type="email" id="email" name="email" required placeholder="contato@transportadora.com" />
+      <label for="email">E‑mail*</label>
+      <input type="email" id="email" name="email" required placeholder="contato@transportadora.com" />
 
-        <label for="telefone">Telefone*</label>
-        <input type="tel" id="telefone" name="telefone" required placeholder="(00) 00000-0000" pattern="\(\d{2}\)\s?\d{4,5}-\d{4}" title="Formato: (00) 00000-0000" />
+      <label for="telefone">Telefone*</label>
+      <input type="tel" id="telefone" name="telefone" required placeholder="(00) 00000‑0000"
+             pattern="\(\d{2}\)\s?\d{4,5}-\d{4}" title="Formato: (00) 00000‑0000" />
 
-        <label for="documentos">Documentos de registro e autorização sanitária (futuramente)*</label>
-        <textarea id="documentos" name="documentos" placeholder="Digite detalhes ou informações dos documentos"></textarea>
-      </div>
+      <label for="documentos">Documentos de registro e autorização sanitária (futuramente)</label>
+      <textarea id="documentos" name="documentos" placeholder="Digite detalhes ou informações dos documentos"></textarea>
 
-      <button type="submit">Cadastrar transportadora</button>
-    </form>
-    <div class="link-login">
-      <p>Já tem uma conta? <a href="login.html">Faça login!</a></p>
+      <label for="senha">Senha*</label>
+      <input type="password" id="senha" name="senha" required placeholder="Crie uma senha" />
     </div>
+
+    <button type="submit">Cadastrar Transportadora</button>
+  </form>
+
+  <div class="link-login">
+    <p>Já tem uma conta? <a href="login.html">Faça login!</a></p>
   </div>
+
+  <p id="mensagem"></p>
+  <a href="index.html" class="btn-voltar">Voltar</a>
+</div>
+
+<script>
+  document.getElementById("formCadastro").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const dados = {
+      tipo: "TRANSPORTADORA",
+      nome: document.getElementById("razao-social").value,
+      cnpj: document.getElementById("documento").value,
+      email: document.getElementById("email").value,
+      telefone: document.getElementById("telefone").value,
+      senha: document.getElementById("senha").value,
+      cep: document.getElementById("cep").value,
+      cidade: document.getElementById("cidade").value,
+      estado: document.getElementById("estado").value,
+      bairro: document.getElementById("bairro").value,
+      rua: document.getElementById("rua").value,
+      numero: document.getElementById("numero").value,
+      complemento: document.getElementById("complemento").value,
+      tipoTransportador: document.getElementById("tipo-transportador").value,
+      cnh: document.getElementById("cnh").value,
+      placas: document.getElementById("placas").value,
+      tipoVeiculo: document.getElementById("tipo-veiculo").value,
+      capacidadeMin: parseInt(document.getElementById("capacidade-min").value),
+      capacidadeMax: parseInt(document.getElementById("capacidade-max").value),
+      documentos: document.getElementById("documentos").value
+    };
+
+    try {
+      const res = await fetch("http://localhost:8080/cadastro", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dados)
+      });
+      document.getElementById("mensagem").innerText = await res.text();
+    } catch (err) {
+      document.getElementById("mensagem").innerText = "Erro: " + err;
+    }
+  });
+</script>
 
 </body>
 </html>
