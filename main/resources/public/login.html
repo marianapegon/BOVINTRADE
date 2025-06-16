@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Login - BovinTrade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #f2f1ee, #e8e6e1);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: #000000;
+      padding: 0;
+    }
+
+    .login-container {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      width: 100%;
+      max-width: 450px;
+      margin: auto;
+      padding: 2.5rem;
+      border: 1px solid #dedbd2;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .login-header h1 {
+      font-family: 'Lora', serif;
+      color: #8B0000;
+      font-weight: 700;
+      font-size: 2.2rem;
+      line-height: 1.3;
+    }
+
+    .login-header p {
+      font-family: 'Lora', serif;
+      font-size: 1.4rem;
+      color: #000000;
+      margin-top: 0.5rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: #000000;
+    }
+
+    input {
+      font-family: 'Poppins', sans-serif;
+      padding: 12px 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+      width: 100%;
+      color: #000000;
+    }
+
+    input:focus {
+      border-color: #8B0000;
+      outline: none;
+    }
+
+    .forgot-password {
+      text-align: right;
+      margin-top: -0.8rem;
+    }
+
+    .forgot-password a {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      color: #8B0000;
+      text-decoration: none;
+    }
+
+    .forgot-password a:hover {
+      text-decoration: underline;
+    }
+
+    button {
+      font-family: 'Poppins', sans-serif;
+      background-color: transparent;
+      color: #000000;
+      border: 2px solid #8B0000;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+
+    button:hover {
+      background-color: #8B0000;
+      color: #ffffff;
+    }
+
+    .register-link {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .register-link a {
+      color: #8B0000;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .register-link a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      body {
+        padding: 0;
+        background: #fff;
+      }
+      
+      .login-container {
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+        min-height: 100vh;
+        padding: 2rem 1.5rem;
+        justify-content: center;
+      }
+      
+      .login-header h1 {
+        font-size: 2rem;
+      }
+      
+      .login-header p {
+        font-size: 1.2rem;
+      }
+      
+      input {
+        padding: 10px 12px;
+      }
+      
+      button {
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-container">
+  <div class="login-header">
+    <h1>Bem-vindo</h1>
+    <p>ao BovinTrade</p>
+  </div>
+
+  <form id="login-form">
+    <div class="input-group">
+      <label for="email">E-mail</label>
+      <input type="email" id="email" name="email" required placeholder="Seu e-mail cadastrado" />
+    </div>
+
+    <div class="input-group">
+      <label for="senha">Senha</label>
+      <input type="password" id="senha" name="senha" required placeholder="Sua senha" />
+      <div class="forgot-password">
+        <a href="recuperar-senha.html"><br>Esqueceu sua senha?</a>
+      </div>
+    </div>
+
+    <button type="submit">Entrar</button>
+  </form>
+
+  <div class="register-link">
+    <p>Não tem uma conta? <a href="cadastro.html">Cadastre-se!</a></p>
+  </div>
+</div>
+
+<script>
+  document.getElementById('login-form').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const senha = document.getElementById('senha').value;
+
+    try {
+      const resposta = await fetch('http://localhost:8080/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email,
+          senha: senha
+        })
+      });
+
+      if (resposta.ok) {
+        // Redireciona para a tela principal da fazenda
+        window.location.href = 'pagina-principal.html';
+      } else {
+        alert('E-mail ou senha inválidos.');
+      }
+    } catch (erro) {
+      console.error('Erro ao tentar fazer login:', erro);
+      alert('Erro ao conectar com o servidor.');
+    }
+  });
+</script>
+
+</body>
+</html>
