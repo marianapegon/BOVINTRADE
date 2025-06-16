@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>BovinTrade - Meu Carrinho</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #a30000;
+      --primary-light: #d43b3b;
+      --primary-dark: #7a0000;
+      --secondary: #f8f5f2;
+      --text: #333333;
+      --text-light: #666666;
+      --background: #ffffff;
+      --border: #e0e0e0;
+      --success: #4caf50;
+      --warning: #ff9800;
+      --info: #2196f3;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      height: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: white;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo i {
+      font-size: 1.5rem;
+    }
+
+    .user-menu {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .user-menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    .user-menu a:hover {
+      opacity: 0.9;
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .user-avatar:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .container {
+      display: flex;
+      min-height: calc(100vh - 76px);
+    }
+
+    .sidebar {
+      width: 280px;
+      background-color: var(--background);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 0;
+      transition: transform 0.3s ease;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .sidebar-header {
+      padding: 0 1.5rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-title {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-light);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar-menu {
+      list-style: none;
+    }
+
+    .menu-category {
+      color: var(--text-light);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.75rem 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .menu-item {
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s;
+      border-left: 3px solid transparent;
+    }
+
+    .menu-item i {
+      width: 24px;
+      text-align: center;
+      color: var(--text-light);
+    }
+
+    .menu-item:hover {
+      background-color: rgba(163, 0, 0, 0.05);
+      color: var(--primary);
+      border-left: 3px solid var(--primary);
+    }
+
+    .menu-item:hover i {
+      color: var(--primary);
+    }
+
+    .menu-item.active {
+      background-color: rgba(163, 0, 0, 0.1);
+      color: var(--primary);
+      border-left: 3px solid var(--primary);
+    }
+
+    .menu-item.active i {
+      color: var(--primary);
+    }
+
+    .main {
+      flex: 1;
+      padding: 2.5rem;
+      background-color: #f9f9f9;
+      position: relative;
+      overflow-y: auto;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .dashboard-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .dashboard-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(163, 0, 0, 0.2);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background-color: rgba(163, 0, 0, 0.05);
+    }
+
+    .btn-success {
+      background-color: var(--success);
+      color: white;
+    }
+
+    .btn-success:hover {
+      background-color: #3d8b40;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(76, 175, 80, 0.2);
+    }
+
+    .btn-danger {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background-color: #d32f2f;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(244, 67, 54, 0.2);
+    }
+
+    .btn-sm {
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+    }
+
+    .cart-container {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .cart-items {
+      flex: 2;
+    }
+
+    .cart-summary {
+      flex: 1;
+    }
+
+    .cart-card {
+      background-color: var(--background);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1.5rem;
+    }
+
+    .cart-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cart-farm-name {
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cart-item-details {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .cart-item-image {
+      width: 120px;
+      height: 120px;
+      border-radius: 8px;
+      background-color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      overflow: hidden;
+    }
+
+    .cart-item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .cart-item-description {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+
+    .cart-item-specs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .spec-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .spec-item i {
+      color: var(--primary);
+      width: 20px;
+      text-align: center;
+    }
+
+    .cart-item-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .cart-item-price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .cart-item-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .quantity-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: rgba(163, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+    }
+
+    .quantity-btn:hover {
+      background-color: rgba(163, 0, 0, 0.2);
+    }
+
+    .quantity-value {
+      width: 40px;
+      text-align: center;
+    }
+
+    .summary-card {
+      background-color: var(--background);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1.5rem;
+    }
+
+    .summary-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+
+    .summary-total {
+      font-weight: 600;
+      border-top: 1px solid var(--border);
+      padding-top: 0.75rem;
+      margin-top: 0.75rem;
+      font-size: 1.1rem;
+    }
+
+    .summary-total .value {
+      color: var(--primary);
+      font-size: 1.3rem;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 3rem;
+      background-color: var(--background);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .empty-cart-icon {
+      font-size: 3rem;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .empty-cart-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .empty-cart-text {
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (max-width: 1024px) {
+      .sidebar {
+        position: fixed;
+        top: 76px;
+        left: 0;
+        bottom: 0;
+        transform: translateX(-100%);
+        z-index: 90;
+        background-color: var(--background);
+      }
+
+      .sidebar.active {
+        transform: translateX(0);
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 1.5rem;
+      }
+
+      .cart-container {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .cart-item-details {
+        flex-direction: column;
+      }
+
+      .cart-item-image {
+        width: 100%;
+        height: 200px;
+      }
+
+      .cart-item-specs {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 1rem;
+      }
+
+      .logo span {
+        display: none;
+      }
+
+      .user-menu a:not(.user-avatar) {
+        display: none;
+      }
+
+      .main {
+        padding: 1rem;
+      }
+
+      .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .cart-item-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .cart-item-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+ <div class="logo">
+   <a href="07 - painel-frigorifico.html" style="text-decoration: none;"> 🐄 </a> <!-- Emoji de vaca -->
+    <span><a href="07 - painel-frigorifico.html" style="text-decoration: none; color: white;">BovinTrade </a></span>
+  </div>
+    <div class="user-menu">
+      <a href="notificacoes-frigorifico.html"><i class="fas fa-bell"></i></a>
+
+      <a href="meu-perfil-frigorifico.html">Minha Conta</a>
+      <div class="user-avatar">
+        <i class="fas fa-user"></i>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-title">Menu Principal</div>
+      </div>
+
+      <ul class="sidebar-menu">
+      <li class="menu-category">Frigorífico</li>
+        <a href="07 - painel-frigorifico.html" class="menu-item active">
+          <i class="fas fa-industry"></i>
+          <span>Painel do Frigorífico</span>
+        </a>
+        <a href="08 - meu-carrinho.html" class="menu-item">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Meu Carrinho</span>
+        </a>
+        <a href="pesquisa-lotes.html" class="menu-item">
+          <i class="fas fa-search"></i>
+          <span>Pesquisa de Lotes</span>
+        </a>
+        <a href="09 - recebimento-lotes.html" class="menu-item">
+          <i class="fas fa-truck-loading"></i>
+          <span>Recebimento de Lotes</span>
+        </a>
+        <a href="10 - historico-compras.html" class="menu-item">
+          <i class="fas fa-history"></i>
+          <span>Histórico de Compras</span>
+        </a>
+        <a href="11 - historicopgtofeito.html" class="menu-item">
+          <i class="fas fa-money-bill-wave"></i>
+          <span>Histórico de Pagamentos Feitos</span>
+        </a>
+        <a href="12 - avaliar-vendedor.html" class="menu-item">
+          <i class="fas fa-star"></i>
+          <span>Avaliar Vendedor</span>
+        </a>
+                <a href="13 - avaliar-entrega.html" class="menu-item">
+          <i class="fas fa-truck"></i>
+          <span>Avaliar Entrega</span>
+        </a>
+          <a href="meu-perfil-frigorifico.html" class="menu-item">
+    <i class="fas fa-user-cog"></i>
+    <span>Meu Perfil</span>
+  </a>
+        <a href="notificacoes-frigorifico.html" class="menu-item">
+    <i class="fas fa-bell"></i></i>
+    <span>Notificaçoes</span>
+  </a>
+          <a href="../cadastro/login.html" class="menu-item">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Sair</span>
+        </a>
+</ul>
+    </aside>
+
+    <main class="main">
+      <div class="dashboard-header">
+        <h1 class="dashboard-title">Meu Carrinho</h1>
+        <div class="dashboard-actions">
+          <button class="btn btn-outline">
+            <i class="fas fa-arrow-left"><a href="pesquisa-lotes.html" style="text-decoration: none; color: var(--primary);"> </i> Continuar Comprando </a>
+          </button>
+        </div>
+      </div>
+
+      <div class="cart-container">
+        <div class="cart-items">
+          <!-- Carrinho com itens -->
+          <div class="cart-card">
+            <div class="cart-item-header">
+              <div class="cart-farm-name">
+                <i class="fas fa-tractor"></i>
+                Fazenda Santa Maria
+              </div>
+              <button class="btn btn-danger btn-sm">
+                <i class="fas fa-trash"></i> Remover Tudo
+              </button>
+            </div>
+            
+            <div class="cart-item-details">
+              <div class="cart-item-image">
+                <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Lote de gado">
+              </div>
+              
+              <div class="cart-item-info">
+                <h3 class="cart-item-title">Lote #BOV-2458 - Nelore</h3>
+                <p class="cart-item-description">Gado Nelore com média de 18-20 arrobas, vacinado e com certificado de origem. Lote uniforme com animais entre 24-30 meses.</p>
+                
+                <div class="cart-item-specs">
+                  <div class="spec-item">
+                    <i class="fas fa-hashtag"></i>
+                    <span>Quantidade: <strong>120 cabeças</strong></span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-weight-hanging"></i>
+                    <span>Peso médio: <strong>480 kg</strong></span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Localização: <strong>Goiás</strong></span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Disponível: <strong>15/06/2023</strong></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="cart-item-footer">
+              <div class="cart-item-price">R$ 72.000,00</div>
+              
+              <div class="cart-item-actions">
+                <div class="quantity-control">
+                  <button class="quantity-btn"><i class="fas fa-minus"></i></button>
+                  <input type="text" class="quantity-value" value="1" readonly>
+                  <button class="quantity-btn"><i class="fas fa-plus"></i></button>
+                </div>
+                
+                <button class="btn btn-danger btn-sm">
+                  <i class="fas fa-trash"></i> Remover
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="cart-card">
+            <div class="cart-item-header">
+              <div class="cart-farm-name">
+                <i class="fas fa-tractor"></i>
+                Fazenda Boa Vista
+              </div>
+              <button class="btn btn-danger btn-sm">
+                <i class="fas fa-trash"></i> Remover Tudo
+              </button>
+            </div>
+            
+            <div class="cart-item-details">
+              <div class="cart-item-image">
+                <img src="https://images.unsplash.com/photo-1527153857715-3908f2bae5e8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Lote de gado">
+              </div>
+              
+              <div class="cart-item-info">
+                <h3 class="cart-item-title">Lote #BOV-2457 - Angus</h3>
+                <p class="cart-item-description">Gado Angus com excelente marmoreio, peso médio de 22 arrobas. Animais criados a pasto com suplementação mineral.</p>
+                
+                <div class="cart-item-specs">
+                  <div class="spec-item">
+                    <i class="fas fa-hashtag"></i>
+                    <span>Quantidade: <strong>85 cabeças</strong></span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-weight-hanging"></i>
+                    <span>Peso médio: <strong>550 kg</strong></span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Localização: <strong>Mato Grosso do Sul</strong></span>
+                  </div>
+                  <div class="spec-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Disponível: <strong>20/06/2023</strong></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="cart-item-footer">
+              <div class="cart-item-price">R$ 51.000,00</div>
+              
+              <div class="cart-item-actions">
+                <div class="quantity-control">
+                  <button class="quantity-btn"><i class="fas fa-minus"></i></button>
+                  <input type="text" class="quantity-value" value="1" readonly>
+                  <button class="quantity-btn"><i class="fas fa-plus"></i></button>
+                </div>
+                
+                <button class="btn btn-danger btn-sm">
+                  <i class="fas fa-trash"></i> Remover
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Carrinho vazio (comentado) -->
+          <!--
+          <div class="empty-cart">
+            <div class="empty-cart-icon">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <h3 class="empty-cart-title">Seu carrinho está vazio</h3>
+            <p class="empty-cart-text">Parece que você ainda não adicionou nenhum lote ao seu carrinho. Comece a explorar os lotes disponíveis para encontrar os melhores animais para seu frigorífico.</p>
+            <button class="btn btn-primary">
+              <i class="fas fa-search"></i> Buscar Lotes
+            </button>
+          </div>
+          -->
+        </div>
+        
+        <div class="cart-summary">
+          <div class="summary-card">
+            <h3 class="summary-title"><i class="fas fa-receipt"></i> Resumo do Pedido</h3>
+            
+            <div class="summary-row">
+              <span>Subtotal (2 lotes)</span>
+              <span>R$ 123.000,00</span>
+            </div>
+            
+            <div class="summary-row">
+              <span>Taxa de Serviço</span>
+              <span>R$ 1.230,00</span>
+            </div>
+            
+            <div class="summary-row">
+              <span>Frete Estimado</span>
+              <span>R$ 8.500,00</span>
+            </div>
+            
+            <div class="summary-row summary-total">
+              <span>Total</span>
+              <span class="value">R$ 132.730,00</span>
+            </div>
+          </div>
+          
+          <div class="summary-card">
+            <h3 class="summary-title"><i class="fas fa-truck"></i> Opções de Entrega</h3>
+            
+            <div class="form-group" style="margin-bottom: 1rem;">
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Transportadora</label>
+              <select style="width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border);">
+                <option>BovinLog Transportes</option>
+                <option>AgroExpress</option>
+                <option>TransPecuária</option>
+              </select>
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 1rem;">
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Data de Entrega</label>
+              <input type="date" style="width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border);">
+            </div>
+            
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+              <i class="fas fa-calculator"></i> Recalcular Frete
+            </button>
+          </div>
+          
+          <button class="btn btn-success" style="width: 100%; padding: 1rem; font-size: 1.1rem;">
+            <i class="fas fa-credit-card"></i><a href="pagamento.html" style="color: white; text-decoration: none;"> Finalizar Compra </a>
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuItems = document.querySelectorAll('.menu-item');
+      
+      menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+          menuItems.forEach(i => i.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+      
+      const sidebar = document.querySelector('.sidebar');
+      if (window.innerWidth <= 1024) {
+        sidebar.classList.add('active');
+      }
+      
+      // Controle de quantidade
+      const minusBtns = document.querySelectorAll('.quantity-btn .fa-minus');
+      const plusBtns = document.querySelectorAll('.quantity-btn .fa-plus');
+      
+      minusBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const input = this.closest('.quantity-control').querySelector('.quantity-value');
+          let value = parseInt(input.value);
+          if (value > 1) {
+            input.value = value - 1;
+          }
+        });
+      });
+      
+      plusBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const input = this.closest('.quantity-control').querySelector('.quantity-value');
+          let value = parseInt(input.value);
+          input.value = value + 1;
+        });
+      });
+    });
+  </script>
+</body>
+</html>

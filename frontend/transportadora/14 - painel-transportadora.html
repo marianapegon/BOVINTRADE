@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>BovinTrade - Painel da Transportadora</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #a30000;
+      --primary-light: #d43b3b;
+      --primary-dark: #7a0000;
+      --secondary: #f8f5f2;
+      --text: #333333;
+      --text-light: #666666;
+      --background: #ffffff;
+      --border: #e0e0e0;
+      --success: #4caf50;
+      --warning: #ff9800;
+      --info: #2196f3;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      height: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: white;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo i {
+      font-size: 1.5rem;
+    }
+
+    .user-menu {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .user-menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    .user-menu a:hover {
+      opacity: 0.9;
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .user-avatar:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .container {
+      display: flex;
+      min-height: calc(100vh - 76px);
+    }
+
+    .sidebar {
+      width: 280px;
+      background-color: var(--background);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 0;
+      transition: transform 0.3s ease;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .sidebar-header {
+      padding: 0 1.5rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-title {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-light);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar-menu {
+      list-style: none;
+    }
+
+    .menu-category {
+      color: var(--text-light);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.75rem 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .menu-item {
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s;
+      border-left: 3px solid transparent;
+    }
+
+    .menu-item i {
+      width: 24px;
+      text-align: center;
+      color: var(--text-light);
+    }
+
+    .menu-item:hover {
+      background-color: rgba(163, 0, 0, 0.05);
+      color: var(--primary);
+      border-left: 3px solid var(--primary);
+    }
+
+    .menu-item:hover i {
+      color: var(--primary);
+    }
+
+    .menu-item.active {
+      background-color: rgba(163, 0, 0, 0.1);
+      color: var(--primary);
+      border-left: 3px solid var(--primary);
+    }
+
+    .menu-item.active i {
+      color: var(--primary);
+    }
+
+    .main {
+      flex: 1;
+      padding: 2.5rem;
+      background-color: #f9f9f9;
+      position: relative;
+      overflow-y: auto;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .dashboard-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .dashboard-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(163, 0, 0, 0.2);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background-color: rgba(163, 0, 0, 0.05);
+    }
+
+    .welcome-card {
+      background: linear-gradient(135deg, rgba(163, 0, 0, 0.9), rgba(122, 0, 0, 0.9));
+      color: white;
+      border-radius: 12px;
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(163, 0, 0, 0.15);
+    }
+
+    .welcome-card::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 200px;
+      height: 200px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+
+    .welcome-card::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      right: -30px;
+      width: 200px;
+      height: 200px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+    }
+
+    .welcome-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .welcome-text {
+      font-size: 1.1rem;
+      max-width: 600px;
+      opacity: 0.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .action-card {
+      background-color: var(--background);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border-left: 4px solid var(--primary);
+    }
+
+    .action-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .action-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .action-title i {
+      color: var(--primary);
+    }
+
+    .action-text {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 1.25rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat-card {
+      background-color: var(--background);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .stat-title {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .stat-change {
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .stat-change.up {
+      color: var(--success);
+    }
+
+    .stat-change.down {
+      color: #f44336;
+    }
+
+    .recent-activity {
+      background-color: var(--background);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .activity-list {
+      list-style: none;
+    }
+
+    .activity-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+
+    .activity-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(163, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .activity-content {
+      flex: 1;
+    }
+
+    .activity-title {
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .activity-time {
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    /* Transportes pendentes */
+    .transports-list {
+      background-color: var(--background);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2.5rem;
+    }
+
+    .transport-item {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .transport-item:last-child {
+      border-bottom: none;
+    }
+
+    .transport-info {
+      flex: 1;
+    }
+
+    .transport-title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .transport-details {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .transport-detail {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .transport-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .btn-sm {
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 1024px) {
+      .sidebar {
+        position: fixed;
+        top: 76px;
+        left: 0;
+        bottom: 0;
+        transform: translateX(-100%);
+        z-index: 90;
+        background-color: var(--background);
+      }
+
+      .sidebar.active {
+        transform: translateX(0);
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .welcome-card {
+        padding: 1.5rem;
+      }
+
+      .welcome-title {
+        font-size: 1.5rem;
+      }
+
+      .quick-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .transport-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .transport-actions {
+        width: 100%;
+        justify-content: flex-end;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 1rem;
+      }
+
+      .logo span {
+        display: none;
+      }
+
+      .user-menu a:not(.user-avatar) {
+        display: none;
+      }
+
+      .main {
+        padding: 1rem;
+      }
+
+      .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .welcome-card::before,
+      .welcome-card::after {
+        display: none;
+      }
+
+      .transport-details {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .transport-actions {
+        justify-content: space-between;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><a href="14 - painel-transportadora.html" style="color: white; text-decoration: none;"> 🐄 <!-- Emoji de vaca -->
+      <span>BovinTrade</a></span>
+    </div>
+    <div class="user-menu">
+      <a href="notificacoes-transportadora.html"><i class="fas fa-bell"></i></a>
+
+      <a href="meu-perfil-transportadora.html">Minha Conta</a>
+      <div class="user-avatar">
+        <i class="fas fa-user"></i>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-title">Menu Principal</div>
+      </div>
+      
+      <ul class="sidebar-menu">
+        <li class="menu-category">Transportadora</li>
+        <a href="14 - painel-transportadora.html" class="menu-item active">
+          <i class="fas fa-truck"></i>
+          <span>Painel da Transportadora</span>
+        </a>
+        <a href="15 - validacaoretirada.html" class="menu-item">
+          <i class="fas fa-clipboard-check"></i>
+          <span>Validação de Retirada</span>
+        </a>
+        <a href="16 - confirmacaoentrega.html" class="menu-item">
+          <i class="fas fa-check-circle"></i>
+          <span>Confirmação de Entrega</span>
+        </a>
+        <a href="17 - historicotransporte.html" class="menu-item">
+          <i class="fas fa-history"></i>
+          <span>Histórico de Transportes</span>
+        </a>
+        <a href="18 - historpgtorectransportadora.html" class="menu-item">
+          <i class="fas fa-money-bill-wave"></i>
+          <span>Histórico de Pagamentos Recebidos</span>
+        </a>
+        <a href="19 - avaliacaotrans.html" class="menu-item">
+          <i class="fas fa-star"></i>
+          <span>Avaliações Recebidas</span>
+        </a>
+                <a href="meu-perfil-transportadora.html" class="menu-item">
+          <i class="fas fa-user"></i>
+          <span>Meu Perfil</span>
+        </a>
+          <a href="notificacoes-transportadora.html" class="menu-item">
+          <i class="fas fa-bell"></i>
+          <span>Notificações</span>
+        </a>        
+        <a href="../cadastro/login.html" class="menu-item">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Sair</span>
+        </a>
+        
+        <li class="menu-category">Frota</li>
+        <a href="20 - gerenciarfrota.html" class="menu-item">
+          <i class="fas fa-truck-moving"></i>
+          <span>Gerenciar Frota</span>
+        </a>
+        <a href="21 - gerenciarmotorista.html" class="menu-item">
+          <i class="fas fa-user-tie"></i>
+          <span>Gerenciar Motoristas</span>
+        </a>
+        <a href="22 - agendatransportes.html" class="menu-item">
+          <i class="fas fa-calendar-alt"></i>
+          <span>Agenda de Transportes</span>
+        </a>
+      </ul>
+    </aside>
+
+    <main class="main">
+      <div class="dashboard-header">
+        <h1 class="dashboard-title">Painel da Transportadora</h1>
+        <div class="dashboard-actions">
+          <button class="btn btn-outline">
+            <i class="fas fa-download"></i> Relatório
+          </button>
+          <button class="btn btn-primary">
+            <i class="fas fa-plus"></i><a href="20 - gerenciarfrota.html" style="color: white; text-decoration: none;"> Novo Veículo </a>
+          </button>
+        </div>
+      </div>
+
+      <div class="welcome-card">
+        <h2 class="welcome-title">Bem-vindo, Transportadora Expresso Boi!</h2>
+        <p class="welcome-text">Acompanhe seus transportes agendados, confirmações pendentes e atividades recentes. Você tem 5 transportes agendados para hoje e 3 confirmações de entrega pendentes.</p>
+      </div>
+
+      <div class="quick-actions">
+        <div class="action-card">
+          <h3 class="action-title"><i class="fas fa-clipboard-check"></i> Validar Retiradas</h3>
+          <p class="action-text">Confirme a retirada dos animais nas fazendas conforme agendado.</p>
+          <button class="btn btn-primary btn-sm"><a href="15 - validacaoretirada.html" style="color: white; text-decoration: none;">Validar</a></button>
+        </div>
+        
+        <div class="action-card">
+          <h3 class="action-title"><i class="fas fa-check-circle"></i> Confirmar Entregas</h3>
+          <p class="action-text">Registre a conclusão dos transportes nos frigoríficos.</p>
+          <button class="btn btn-primary btn-sm"><a href="16 - confirmacaoentrega.html" style="color: white; text-decoration: none;"> Confirmar</a></button>
+        </div>
+        
+        <div class="action-card">
+          <h3 class="action-title"><i class="fas fa-truck-moving"></i> Gerenciar Frota</h3>
+          <p class="action-text">Adicione veículos ou mantenha o cadastro da sua frota atualizado.</p>
+          <button class="btn btn-primary btn-sm"><a href="20 - gerenciarfrota.html" style="color: white; text-decoration: none;">  Gerenciar </a></button>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-title"><i class="fas fa-truck"></i> Transportes Hoje</div>
+          <div class="stat-value">5</div>
+          <div class="stat-change up">
+            <i class="fas fa-arrow-up"></i> 2 a mais que ontem
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-title"><i class="fas fa-clock"></i> Pendentes de Confirmação</div>
+          <div class="stat-value">3</div>
+          <div class="stat-change down">
+            <i class="fas fa-arrow-down"></i> 1 a menos que ontem
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-title"><i class="fas fa-calendar-week"></i> Transportes Esta Semana</div>
+          <div class="stat-value">18</div>
+          <div class="stat-change up">
+            <i class="fas fa-arrow-up"></i> 15% desde a semana passada
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-title"><i class="fas fa-star"></i> Avaliação Média</div>
+          <div class="stat-value">4.5</div>
+          <div class="stat-change up">
+            <i class="fas fa-arrow-up"></i> 0.1 pontos desde o último mês
+          </div>
+        </div>
+      </div>
+
+      <div class="transports-list">
+        <h2 class="section-title"><i class="fas fa-clipboard-list"></i> Transportes Pendentes</h2>
+        
+        <div class="transport-item">
+          <div class="transport-info">
+            <div class="transport-title">Transporte #TR-7842 - Fazenda Santa Maria → Frigorífico Carnes Nobres</div>
+            <div class="transport-details">
+              <div class="transport-detail">
+                <i class="fas fa-calendar-day"></i>
+                <span>Hoje, 09:00 - 12:00</span>
+              </div>
+              <div class="transport-detail">
+                <i class="fas fa-boxes"></i>
+                <span>3 lotes (24 cabeças)</span>
+              </div>
+              <div class="transport-detail">
+                <i class="fas fa-user"></i>
+                <span>Motorista: João Silva</span>
+              </div>
+            </div>
+          </div>
+          <div class="transport-actions">
+            <button class="btn btn-outline btn-sm">
+              <i class="fas fa-info-circle"></i> Detalhes
+            </button>
+            <button class="btn btn-primary btn-sm">
+              <i class="fas fa-check"></i> Confirmar
+            </button>
+          </div>
+        </div>
+        
+        <div class="transport-item">
+          <div class="transport-info">
+            <div class="transport-title">Transporte #TR-7843 - Fazenda Boi Gordo → Frigorífico Prime Carne</div>
+            <div class="transport-details">
+              <div class="transport-detail">
+                <i class="fas fa-calendar-day"></i>
+                <span>Hoje, 14:00 - 17:00</span>
+              </div>
+              <div class="transport-detail">
+                <i class="fas fa-boxes"></i>
+                <span>2 lotes (18 cabeças)</span>
+              </div>
+              <div class="transport-detail">
+                <i class="fas fa-user"></i>
+                <span>Motorista: Carlos Oliveira</span>
+              </div>
+            </div>
+          </div>
+          <div class="transport-actions">
+            <button class="btn btn-outline btn-sm">
+              <i class="fas fa-info-circle"></i> Detalhes
+            </button>
+            <button class="btn btn-primary btn-sm">
+              <i class="fas fa-check"></i> Confirmar
+            </button>
+          </div>
+        </div>
+        
+        <div class="transport-item">
+          <div class="transport-info">
+            <div class="transport-title">Transporte #TR-7845 - Fazenda Boi Sadio → Frigorífico Carnes Finas</div>
+            <div class="transport-details">
+              <div class="transport-detail">
+                <i class="fas fa-calendar-day"></i>
+                <span>Amanhã, 08:00 - 11:00</span>
+              </div>
+              <div class="transport-detail">
+                <i class="fas fa-boxes"></i>
+                <span>4 lotes (32 cabeças)</span>
+              </div>
+              <div class="transport-detail">
+                <i class="fas fa-user"></i>
+                <span>Motorista: Pedro Santos</span>
+              </div>
+            </div>
+          </div>
+          <div class="transport-actions">
+            <button class="btn btn-outline btn-sm">
+              <i class="fas fa-info-circle"></i> Detalhes
+            </button>
+            <button class="btn btn-primary btn-sm">
+              <i class="fas fa-check"></i> Confirmar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="recent-activity">
+        <h2 class="section-title"><i class="fas fa-bell"></i> Atividades Recentes</h2>
+        <ul class="activity-list">
+          <li class="activity-item">
+            <div class="activity-icon">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="activity-content">
+              <div class="activity-title">Transporte #TR-7839 concluído com sucesso</div>
+              <div class="activity-time">Hoje, 13:45</div>
+            </div>
+          </li>
+          <li class="activity-item">
+            <div class="activity-icon">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="activity-content">
+              <div class="activity-title">Atraso no transporte #TR-7840 - Problema mecânico</div>
+              <div class="activity-time">Hoje, 10:30</div>
+            </div>
+          </li>
+          <li class="activity-item">
+            <div class="activity-icon">
+              <i class="fas fa-star"></i>
+            </div>
+            <div class="activity-content">
+              <div class="activity-title">Nova avaliação recebida: 4 estrelas</div>
+              <div class="activity-time">Ontem, 18:20</div>
+            </div>
+          </li>
+          <li class="activity-item">
+            <div class="activity-icon">
+              <i class="fas fa-truck"></i>
+            </div>
+            <div class="activity-content">
+              <div class="activity-title">Novo transporte agendado para amanhã - #TR-7845</div>
+              <div class="activity-time">Ontem, 16:15</div>
+            </div>
+          </li>
+          <li class="activity-item">
+            <div class="activity-icon">
+              <i class="fas fa-money-bill-wave"></i>
+            </div>
+            <div class="activity-content">
+              <div class="activity-title">Pagamento recebido por transporte #TR-7832 - R$ 1.850,00</div>
+              <div class="activity-time">Ontem, 09:30</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuItems = document.querySelectorAll('.menu-item');
+      
+      menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+          menuItems.forEach(i => i.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+      
+      const sidebar = document.querySelector('.sidebar');
+      if (window.innerWidth <= 1024) {
+        sidebar.classList.add('active');
+      }
+    });
+  </script>
+</body>
+</html>
