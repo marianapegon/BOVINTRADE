@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>BovinTrade - Cadastro de Lote</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+          font-family: 'Montserrat', sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f9f9f9;
+        }
+
+        header {
+          background-color: #a30000;
+          color: white;
+          padding: 1rem 2rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .logo {
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+
+        .user-menu {
+          display: flex;
+          gap: 1.5rem;
+          align-items: center;
+        }
+
+        .user-menu a {
+          color: white;
+          text-decoration: none;
+          font-weight: 500;
+        }
+
+        .container {
+          padding: 2rem;
+          max-width: 900px;
+          margin: 0 auto;
+          background-color: white;
+          border-radius: 12px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+          color: #a30000;
+          text-align: center;
+          margin-bottom: 1.5rem;
+        }
+
+        form {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        label {
+          font-weight: 500;
+        }
+
+        input, select, textarea {
+          width: 100%;
+          padding: 0.7rem;
+          border-radius: 6px;
+          border: 1px solid #ccc;
+          font-size: 1rem;
+        }
+
+        button {
+          background-color: #a30000;
+          color: white;
+          padding: 0.9rem;
+          border: none;
+          border-radius: 8px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+
+        button:hover {
+          background-color: #7a0000;
+        }
+
+        .hidden {
+          display: none;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">🐄 BovinTrade</div>
+    <div class="user-menu">
+        <a href="02 - painel-fazenda.html">Painel</a>
+        <a href="01 - meu-perfil-fazenda.html">Minha Conta</a>
+        <a href="index.html">Sair</a>
+    </div>
+</header>
+
+<div class="container">
+    <h1>Cadastro de Lote</h1>
+    <form id="formLote">
+
+        <!-- ID da fazenda carregado automaticamente -->
+        <input type="hidden" id="usuarioId" />
+
+        <label>Quantidade*</label>
+        <input type="number" id="quantidade" required placeholder="Ex: 20">
+
+        <label>Peso Médio (kg)*</label>
+        <input type="number" id="pesoMedio" required placeholder="Ex: 450">
+
+        <label>Raça*</label>
+        <select id="raca" required>
+            <option disabled selected value="">Selecione</option>
+            <option>Nelore</option>
+            <option>Angus</option>
+            <option>Brahman</option>
+            <option>Hereford</option>
+        </select>
+
+        <label>Preço por Animal (R$)*</label>
+        <input type="number" id="preco" required placeholder="Ex: 2500" step="0.01">
+
+        <label>Alimentação*</label>
+        <select id="alimentacao" required>
+            <option disabled selected value="">Selecione</option>
+            <option>Pastagem</option>
+            <option>Confinamento</option>
+            <option>Semi-confinamento</option>
+        </select>
+
+        <label>Histórico de Vacinação*</label>
+        <textarea id="vacinas" required placeholder="Descreva as vacinas aplicadas"></textarea>
+
+        <label>Descrição do Lote</label>
+        <textarea id="descricao" placeholder="Informações adicionais sobre o lote"></textarea>
+
+        <button type="submit">Cadastrar Lote</button>
+    </form>
+</div>
+
+<script>
+    // Carregar ID da fazenda logada automaticamente
+    const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+    const fazendaId = usuario?.id;
+
+    if (!fazendaId || usuario?.tipo !== "FAZENDA") {
+      alert("Sessão expirada ou usuário não autorizado. Faça login novamente.");
+      window.location.href = "login.html";
+    }
+
+    document.getElementById("usuarioId").value = fazendaId;
+
+    // Função de envio do formulário
+    document.getElementById("formLote").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const lote = {
+        quantidade: parseInt(document.getElementById("quantidade").value),
+        pesoMedio: parseFloat(document.getElementById("pesoMedio").value),
+        raca: document.getElementById("raca").value,
+        alimentacao: document.getElementById("alimentacao").value,
+        historicoVacinacao: document.getElementById("vacinas").value,
+        preco: parseFloat(document.getElementById("preco").value),
+        descricao: document.getElementById("descricao").value,
+        status: "DISPONIVEL",
+        fazenda: {
+          id: fazendaId
+        }
+      };
+
+      fetch("http://localhost:8080/lotes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(lote)
+      })
+      .then(response => {
+        if (response.ok) {
+          alert("Lote cadastrado com sucesso!");
+          document.getElementById("formLote").reset();
+        } else {
+          return response.text().then(msg => { throw new Error(msg); });
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        alert("Erro ao cadastrar lote: " + error.message);
+      });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meu Perfil - Frigorífico</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #fff;
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      width: 100%;
+      max-width: 700px;
+      border: 1px solid #dedbd2;
+    }
+
+    h1 {
+      font-family: 'Lora', serif;
+      color: #8B0000;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    input[readonly] {
+      background-color: #eee;
+    }
+
+    .buttons {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 10px 18px;
+      border: 2px solid #8B0000;
+      border-radius: 8px;
+      font-weight: 600;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: #8B0000;
+      color: white;
+    }
+
+    .delete {
+      border-color: #dc3545;
+      color: #dc3545;
+    }
+
+    .delete:hover {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    #mensagem {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Meu Perfil - Frigorífico</h1>
+  <form id="formPerfil">
+    <div class="form-group">
+      <label>Nome da Empresa</label>
+      <input type="text" id="nome" required>
+    </div>
+
+    <div class="form-group">
+      <label>CNPJ</label>
+      <input type="text" id="cnpj" readonly>
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="email" required>
+    </div>
+
+    <div class="form-group">
+      <label>Telefone</label>
+      <input type="text" id="telefone" required>
+    </div>
+
+    <div class="form-group">
+      <label>Cidade</label>
+      <input type="text" id="cidade" required>
+    </div>
+
+    <div class="form-group">
+      <label>Estado</label>
+      <input type="text" id="estado" required>
+    </div>
+
+    <div class="form-group">
+      <label>Bairro</label>
+      <input type="text" id="bairro" required>
+    </div>
+
+    <div class="form-group">
+      <label>Rua</label>
+      <input type="text" id="rua" required>
+    </div>
+
+    <div class="form-group">
+      <label>Número</label>
+      <input type="text" id="numero" required>
+    </div>
+
+    <div class="form-group">
+      <label>Complemento</label>
+      <input type="text" id="complemento">
+    </div>
+
+    <div class="form-group">
+      <label>Responsável</label>
+      <input type="text" id="nomeResponsavel" required>
+    </div>
+
+    <div class="form-group">
+      <label>CPF do Responsável</label>
+      <input type="text" id="cpfResponsavel" readonly>
+    </div>
+
+    <div class="form-group">
+      <label>Cargo</label>
+      <input type="text" id="cargoResponsavel">
+    </div>
+
+    <div class="form-group">
+      <label>Latitude</label>
+      <input type="text" id="latitude" required>
+    </div>
+
+    <div class="form-group">
+      <label>Longitude</label>
+      <input type="text" id="longitude" required>
+    </div>
+
+    <div class="buttons">
+      <button type="submit">Salvar Alterações</button>
+      <button type="button" onclick="deletarConta()" class="delete">Excluir Conta</button>
+      <button type="button" onclick="window.history.back()">Voltar</button>
+    </div>
+    <div id="mensagem"></div>
+  </form>
+</div>
+
+<script>
+  const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+  const id = usuario?.id;
+
+  if (!id || usuario.tipo !== "FRIGORIFICO") {
+    alert("Sessão expirada. Faça login novamente.");
+    window.location.href = "login.html";
+  }
+
+  // Carregar dados do frigorífico
+  fetch(`http://localhost:8080/frigorificos/${id}`)
+    .then(res => res.json())
+    .then(data => {
+      for (let key in data) {
+        if (document.getElementById(key)) {
+          document.getElementById(key).value = data[key];
+        }
+      }
+    })
+    .catch(() => {
+      alert("Erro ao carregar os dados.");
+    });
+
+  // Salvar alterações
+  document.getElementById("formPerfil").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const dados = {};
+    document.querySelectorAll("input").forEach(el => {
+      if (el.id) dados[el.id] = el.value;
+    });
+
+    fetch(`http://localhost:8080/frigorificos/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dados)
+    })
+    .then(res => {
+      if (!res.ok) throw new Error();
+      return res.text();
+    })
+    .then(msg => {
+      document.getElementById("mensagem").innerText = "Perfil atualizado com sucesso!";
+    })
+    .catch(() => {
+      document.getElementById("mensagem").innerText = "Erro ao atualizar perfil.";
+    });
+  });
+
+  // Excluir conta
+  function deletarConta() {
+    if (confirm("Deseja realmente excluir sua conta? Esta ação não poderá ser desfeita.")) {
+      fetch(`http://localhost:8080/frigorificos/${id}`, {
+        method: "DELETE"
+      })
+      .then(res => {
+        if (res.ok) {
+          alert("Conta excluída com sucesso.");
+          localStorage.clear();
+          window.location.href = "login.html";
+        } else {
+          alert("Erro ao excluir a conta.");
+        }
+      });
+    }
+  }
+</script>
+
+</body>
+</html>

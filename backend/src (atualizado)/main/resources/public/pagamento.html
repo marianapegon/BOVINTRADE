@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>BovinTrade - Pagamento</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #a30000;
+      --primary-light: #d43b3b;
+      --primary-dark: #7a0000;
+      --secondary: #f8f5f2;
+      --text: #333333;
+      --text-light: #666666;
+      --background: #ffffff;
+      --border: #e0e0e0;
+      --success: #4caf50;
+      --warning: #ff9800;
+      --info: #2196f3;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      height: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: white;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo i {
+      font-size: 1.5rem;
+    }
+
+    .user-menu {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .user-menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    .user-menu a:hover {
+      opacity: 0.9;
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .user-avatar:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .container {
+      display: flex;
+      min-height: calc(100vh - 76px);
+    }
+
+    .sidebar {
+      width: 280px;
+      background-color: var(--background);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 0;
+      transition: transform 0.3s ease;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .sidebar-header {
+      padding: 0 1.5rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-title {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-light);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar-menu {
+      list-style: none;
+    }
+
+    .menu-category {
+      color: var(--text-light);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.75rem 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .menu-item {
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s;
+      border-left: 3px solid transparent;
+    }
+
+    .menu-item i {
+      width: 24px;
+      text-align: center;
+      color: var(--text-light);
+    }
+
+    .menu-item:hover {
+      background-color: rgba(163, 0, 0, 0.05);
+      color: var(--primary);
+      border-left: 3px solid var(--primary);
+    }
+
+    .menu-item:hover i {
+      color: var(--primary);
+    }
+
+    .menu-item.active {
+      background-color: rgba(163, 0, 0, 0.1);
+      color: var(--primary);
+      border-left: 3px solid var(--primary);
+    }
+
+    .menu-item.active i {
+      color: var(--primary);
+    }
+
+    .main {
+      flex: 1;
+      padding: 2.5rem;
+      background-color: #f9f9f9;
+      position: relative;
+      overflow-y: auto;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .dashboard-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .dashboard-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(163, 0, 0, 0.2);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background-color: rgba(163, 0, 0, 0.05);
+    }
+
+    /* Estilos específicos para a página de pagamento */
+    .payment-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: var(--background);
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .payment-header {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .payment-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .payment-subtitle {
+      color: var(--text-light);
+      font-size: 1rem;
+    }
+
+    .payment-summary {
+      background-color: rgba(163, 0, 0, 0.05);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .summary-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .summary-item:last-child {
+      border-bottom: none;
+    }
+
+    .summary-label {
+      color: var(--text-light);
+    }
+
+    .summary-value {
+      font-weight: 500;
+    }
+
+    .summary-total {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+
+    .payment-form {
+      margin-top: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .form-label.required::after {
+      content: " *";
+      color: var(--primary);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .form-select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 1rem;
+      background-color: white;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .form-select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .payment-methods {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .payment-method {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .payment-method:hover {
+      border-color: var(--primary-light);
+    }
+
+    .payment-method.active {
+      border-color: var(--primary);
+      background-color: rgba(163, 0, 0, 0.05);
+    }
+
+    .payment-method i {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .payment-method-name {
+      font-weight: 500;
+    }
+
+    .payment-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 1024px) {
+      .sidebar {
+        position: fixed;
+        top: 76px;
+        left: 0;
+        bottom: 0;
+        transform: translateX(-100%);
+        z-index: 90;
+        background-color: var(--background);
+      }
+
+      .sidebar.active {
+        transform: translateX(0);
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .payment-container {
+        padding: 1.5rem;
+      }
+
+      .payment-methods {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 1rem;
+      }
+
+      .logo span {
+        display: none;
+      }
+
+      .user-menu a:not(.user-avatar) {
+        display: none;
+      }
+
+      .main {
+        padding: 1rem;
+      }
+
+      .payment-methods {
+        grid-template-columns: 1fr;
+      }
+
+      .payment-actions {
+        flex-direction: column;
+      }
+
+      .payment-actions .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+ <div class="logo">
+   <a href="07 - painel-frigorifico.html" style="text-decoration: none;"> 🐄 </a> <!-- Emoji de vaca -->
+    <span><a href="07 - painel-frigorifico.html" style="text-decoration: none; color: white;">BovinTrade </a></span>
+  </div>
+    <div class="user-menu">
+      <a href="notificacoes-frigorifico.html"><i class="fas fa-bell"></i></a>
+
+      <a href="meu-perfil-frigorifico.html">Minha Conta</a>
+      <div class="user-avatar">
+        <i class="fas fa-user"></i>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-title">Menu Principal</div>
+      </div>
+
+      <ul class="sidebar-menu">
+      <li class="menu-category">Frigorífico</li>
+        <a href="07 - painel-frigorifico.html" class="menu-item active">
+          <i class="fas fa-industry"></i>
+          <span>Painel do Frigorífico</span>
+        </a>
+        <a href="08 - meu-carrinho.html" class="menu-item">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Meu Carrinho</span>
+        </a>
+        <a href="pesquisa-lotes.html" class="menu-item">
+          <i class="fas fa-search"></i>
+          <span>Pesquisa de Lotes</span>
+        </a>
+        <a href="09 - recebimento-lotes.html" class="menu-item">
+          <i class="fas fa-truck-loading"></i>
+          <span>Recebimento de Lotes</span>
+        </a>
+        <a href="10 - historico-compras.html" class="menu-item">
+          <i class="fas fa-history"></i>
+          <span>Histórico de Compras</span>
+        </a>
+        <a href="11 - historicopgtofeito.html" class="menu-item">
+          <i class="fas fa-money-bill-wave"></i>
+          <span>Histórico de Pagamentos Feitos</span>
+        </a>
+        <a href="12 - avaliar-vendedor.html" class="menu-item">
+          <i class="fas fa-star"></i>
+          <span>Avaliar Vendedor</span>
+        </a>
+                <a href="13 - avaliar-entrega.html" class="menu-item">
+          <i class="fas fa-truck"></i>
+          <span>Avaliar Entrega</span>
+        </a>
+          <a href="meu-perfil-frigorifico.html" class="menu-item">
+    <i class="fas fa-user-cog"></i>
+    <span>Meu Perfil</span>
+  </a>
+
+        <a href="notificacoes-frigorifico.html" class="menu-item">
+    <i class="fas fa-bell"></i></i>
+    <span>Notificaçoes</span>
+  </a>
+        <a href="index.html" class="menu-item">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Sair</span>
+        </a>
+</ul>
+    </aside>
+
+    <main class="main">
+      <div class="payment-container">
+        <div class="payment-header">
+          <h1 class="payment-title">Pagamento</h1>
+          <p class="payment-subtitle">Escolha a forma de pagamento para concluir a compra do lote de bois.</p>
+        </div>
+
+        <div class="payment-summary">
+          <h3 class="summary-title"><i class="fas fa-receipt"></i> Resumo da Compra</h3>
+          
+          <div class="summary-item">
+            <span class="summary-label">Número do Pedido:</span>
+            <span class="summary-value">#4587</span>
+          </div>
+          
+          <div class="summary-item">
+            <span class="summary-label">Fazenda:</span>
+            <span class="summary-value">Fazenda Santa Maria</span>
+          </div>
+          
+          <div class="summary-item">
+            <span class="summary-label">Quantidade:</span>
+            <span class="summary-value">120 cabeças</span>
+          </div>
+          
+          <div class="summary-item">
+            <span class="summary-label">Preço por cabeça:</span>
+            <span class="summary-value">R$ 600,00</span>
+          </div>
+          
+          <div class="summary-item">
+            <span class="summary-label">Frete:</span>
+            <span class="summary-value">R$ 2.400,00</span>
+          </div>
+          
+          <div class="summary-item">
+            <span class="summary-label">Taxas:</span>
+            <span class="summary-value">R$ 1.200,00</span>
+          </div>
+          
+          <div class="summary-item">
+            <span class="summary-label">Total:</span>
+            <span class="summary-value summary-total">R$ 75.600,00</span>
+          </div>
+        </div>
+
+        <form class="payment-form">
+          <div class="form-group">
+            <label class="form-label required">Forma de Pagamento</label>
+            <select class="form-select" required>
+              <option value="" selected disabled>Selecione</option>
+              <option value="pix">PIX</option>
+              <option value="boleto">Boleto Bancário</option>
+              <option value="transferencia">Transferência Bancária</option>
+              <option value="credito">Cartão de Crédito</option>
+              <option value="financiamento">Financiamento Agrobusiness</option>
+            </select>
+          </div>
+
+          <div class="payment-methods">
+            <div class="payment-method">
+              <i class="fas fa-barcode"></i>
+              <div class="payment-method-name">Boleto Bancário</div>
+              <small>Pagamento em 1 dia útil</small>
+            </div>
+            
+            <div class="payment-method active">
+              <i class="fas fa-pix"></i>
+              <div class="payment-method-name">PIX</div>
+              <small>Pagamento instantâneo</small>
+            </div>
+            
+            <div class="payment-method">
+              <i class="fas fa-exchange-alt"></i>
+              <div class="payment-method-name">Transferência</div>
+              <small>Até 2 dias úteis</small>
+            </div>
+            
+            <div class="payment-method">
+              <i class="far fa-credit-card"></i>
+              <div class="payment-method-name">Cartão</div>
+              <small>Até 12x</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required">CPF/CNPJ para Nota Fiscal</label>
+            <input type="text" class="form-control" placeholder="Digite seu CPF ou CNPJ" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Observações</label>
+            <textarea class="form-control" rows="3" placeholder="Alguma observação sobre o pagamento?"></textarea>
+          </div>
+
+          <div class="payment-actions">
+            <button type="button" class="btn btn-outline">
+              <i class="fas fa-arrow-left"></i> Voltar
+            </button>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-check-circle"></i> Confirmar Pagamento
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuItems = document.querySelectorAll('.menu-item');
+      const paymentMethods = document.querySelectorAll('.payment-method');
+      
+      // Ativar item do menu clicado
+      menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+          menuItems.forEach(i => i.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+      
+      // Ativar método de pagamento clicado
+      paymentMethods.forEach(method => {
+        method.addEventListener('click', function() {
+          paymentMethods.forEach(m => m.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Atualizar o select com o método selecionado
+          const methodName = this.querySelector('.payment-method-name').textContent;
+          const select = document.querySelector('.form-select');
+          for (let i = 0; i < select.options.length; i++) {
+            if (select.options[i].text.includes(methodName)) {
+              select.selectedIndex = i;
+              break;
+            }
+          }
+        });
+      });
+      
+      // Responsividade do sidebar
+      const sidebar = document.querySelector('.sidebar');
+      if (window.innerWidth <= 1024) {
+        sidebar.classList.add('active');
+      }
+    });
+  </script>
+</body>
+</html>
