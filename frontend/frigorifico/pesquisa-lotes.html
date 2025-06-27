@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>BovinTrade - Pesquisa de Lotes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #a30000;
+      --primary-light: #d43b3b;
+      --primary-dark: #7a0000;
+      --secondary: #f8f5f2;
+      --text: #333333;
+      --text-light: #666666;
+      --background: #ffffff;
+      --border: #e0e0e0;
+      --success: #4caf50;
+      --warning: #ff9800;
+      --info: #2196f3;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      height: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: white;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo i {
+      font-size: 1.5rem;
+    }
+
+    .user-menu {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .user-menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    .user-menu a:hover {
+      opacity: 0.9;
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .user-avatar:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .container {
+      display: flex;
+      min-height: calc(100vh - 76px);
+    }
+
+    .sidebar {
+      width: 280px;
+      background-color: var(--background);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 0;
+      transition: transform 0.3s ease;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .sidebar-header {
+      padding: 0 1.5rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-title {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-light);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar-menu {
+      list-style: none;
+    }
+
+    .menu-category {
+      color: var(--text-light);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.75rem 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .menu-item {
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s;
+      border-left: 3px solid transparent;
+    }
+
+    .menu-item i {
+      width: 24px;
+      text-align: center;
+      color: var(--text-light);
+    }
+
+    .menu-item:hover {
+      background-color: rgba(163, 0, 0, 0.05);
+      color: var(--primary);
+      border-left: 3px solid var(--primary);
+    }
+
+    .menu-item:hover i {
+      color: var(--primary);
+    }
+
+    .menu-item.active {
+      background-color: rgba(163, 0, 0, 0.1);
+      color: var(--primary);
+      border-left: 3px solid var(--primary);
+    }
+
+    .menu-item.active i {
+      color: var(--primary);
+    }
+
+    .main {
+      flex: 1;
+      padding: 2.5rem;
+      background-color: #f9f9f9;
+      position: relative;
+      overflow-y: auto;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .dashboard-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .dashboard-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(163, 0, 0, 0.2);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background-color: rgba(163, 0, 0, 0.05);
+    }
+
+    /* Estilos específicos para a página de pesquisa */
+    .search-container {
+      background-color: var(--background);
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+    }
+
+    .search-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .search-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .search-subtitle {
+      color: var(--text-light);
+      font-size: 1rem;
+    }
+
+    .search-filters {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .filter-group {
+      margin-bottom: 1rem;
+    }
+
+    .filter-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .filter-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    .filter-control:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .filter-select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 1rem;
+      background-color: white;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .filter-select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .search-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1rem;
+    }
+
+    /* Estilos para a tabela de resultados */
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: var(--background);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .results-table th, .results-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .results-table th {
+      background-color: rgba(163, 0, 0, 0.05);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .results-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .results-table tr:hover {
+      background-color: rgba(163, 0, 0, 0.03);
+    }
+
+    .table-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .table-actions .btn {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+      gap: 0.5rem;
+    }
+
+    .page-item {
+      list-style: none;
+    }
+
+    .page-link {
+      display: block;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .page-link:hover {
+      background-color: rgba(163, 0, 0, 0.05);
+      border-color: var(--primary);
+    }
+
+    .page-link.active {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    @media (max-width: 1024px) {
+      .sidebar {
+        position: fixed;
+        top: 76px;
+        left: 0;
+        bottom: 0;
+        transform: translateX(-100%);
+        z-index: 90;
+        background-color: var(--background);
+      }
+
+      .sidebar.active {
+        transform: translateX(0);
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .search-filters {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .results-table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 1rem;
+      }
+
+      .logo span {
+        display: none;
+      }
+
+      .user-menu a:not(.user-avatar) {
+        display: none;
+      }
+
+      .main {
+        padding: 1rem;
+      }
+
+      .search-filters {
+        grid-template-columns: 1fr;
+      }
+
+      .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .search-actions {
+        justify-content: center;
+      }
+
+      .search-actions .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+ <div class="logo">
+   <a href="07 - painel-frigorifico.html" style="text-decoration: none;"> 🐄 </a> <!-- Emoji de vaca -->
+    <span><a href="07 - painel-frigorifico.html" style="text-decoration: none; color: white;">BovinTrade </a></span>
+  </div>
+    <div class="user-menu">
+      <a href="notificacoes-frigorifico.html"><i class="fas fa-bell"></i></a>
+
+      <a href="meu-perfil-frigorifico.html">Minha Conta</a>
+      <div class="user-avatar">
+        <i class="fas fa-user"></i>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-title">Menu Principal</div>
+      </div>
+
+      <ul class="sidebar-menu">
+      <li class="menu-category">Frigorífico</li>
+        <a href="07 - painel-frigorifico.html" class="menu-item active">
+          <i class="fas fa-industry"></i>
+          <span>Painel do Frigorífico</span>
+        </a>
+        <a href="08 - meu-carrinho.html" class="menu-item">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Meu Carrinho</span>
+        </a>
+        <a href="pesquisa-lotes.html" class="menu-item">
+          <i class="fas fa-search"></i>
+          <span>Pesquisa de Lotes</span>
+        </a>
+        <a href="09 - recebimento-lotes.html" class="menu-item">
+          <i class="fas fa-truck-loading"></i>
+          <span>Recebimento de Lotes</span>
+        </a>
+        <a href="10 - historico-compras.html" class="menu-item">
+          <i class="fas fa-history"></i>
+          <span>Histórico de Compras</span>
+        </a>
+          <a href="08 - pagamentofeito.html" class="menu-item">
+    <i class="fas fa-truck"></i>
+    <span>Pagamento Transportadora</span>
+  </a>
+        <a href="11 - historicopgtofeito.html" class="menu-item">
+          <i class="fas fa-money-bill-wave"></i>
+          <span>Histórico de Pagamentos Feitos</span>
+        </a>
+        <a href="12 - avaliar-vendedor.html" class="menu-item">
+          <i class="fas fa-star"></i>
+          <span>Avaliar Vendedor</span>
+        </a>
+                <a href="13 - avaliar-entrega.html" class="menu-item">
+          <i class="fas fa-truck"></i>
+          <span>Avaliar Entrega</span>
+        </a>
+          <a href="meu-perfil-frigorifico.html" class="menu-item">
+    <i class="fas fa-user-cog"></i>
+    <span>Meu Perfil</span>
+  </a>
+
+      <a href="notificacoes-frigorifico.html" class="menu-item">
+    <i class="fas fa-bell"></i></i>
+    <span>Notificaçoes</span>
+  </a>
+          <a href="../cadastro/login.html" class="menu-item">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Sair</span>
+        </a>
+</ul>
+    </aside>
+
+    <main class="main">
+      <div class="dashboard-header">
+        <h1 class="dashboard-title">Pesquisa de Lotes</h1>
+        <div class="dashboard-actions">
+          <button class="btn btn-outline">
+            <i class="fas fa-filter"></i> Filtros Avançados
+          </button>
+        </div>
+      </div>
+
+      <div class="search-container">
+        <div class="search-header">
+          <h2 class="search-title">Filtre os lotes disponíveis</h2>
+          <p class="search-subtitle">Pesquise por peso, raça, tipo de alimentação e localização</p>
+        </div>
+
+        <form class="search-form">
+          <div class="search-filters">
+            <div class="filter-group">
+              <label class="filter-label">Peso Mínimo (kg)</label>
+              <input type="number" class="filter-control" placeholder="Ex: 300">
+            </div>
+            
+            <div class="filter-group">
+              <label class="filter-label">Peso Máximo (kg)</label>
+              <input type="number" class="filter-control" placeholder="Ex: 500">
+            </div>
+            
+            <div class="filter-group">
+              <label class="filter-label">Raça</label>
+              <select class="filter-select">
+                <option value="">Todas</option>
+                <option value="nelore">Nelore</option>
+                <option value="angus">Angus</option>
+                <option value="brangus">Brangus</option>
+                <option value="hereford">Hereford</option>
+                <option value="guzera">Guzerá</option>
+              </select>
+            </div>
+            
+            <div class="filter-group">
+              <label class="filter-label">Tipo de Alimentação</label>
+              <select class="filter-select">
+                <option value="">Todos</option>
+                <option value="pastagem">Pastagem</option>
+                <option value="confinamento">Confinamento</option>
+                <option value="semiconfinamento">Semi-confinamento</option>
+              </select>
+            </div>
+            
+            <div class="filter-group">
+              <label class="filter-label">Localização</label>
+              <select class="filter-select">
+                <option value="">Todas</option>
+                <option value="mt">Mato Grosso</option>
+                <option value="ms">Mato Grosso do Sul</option>
+                <option value="go">Goiás</option>
+                <option value="mg">Minas Gerais</option>
+                <option value="sp">São Paulo</option>
+              </select>
+            </div>
+            
+            <div class="filter-group">
+              <label class="filter-label">Ordenar por</label>
+              <select class="filter-select">
+                <option value="preco">Preço</option>
+                <option value="peso">Peso</option>
+                <option value="quantidade">Quantidade</option>
+                <option value="localizacao">Localização</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="search-actions">
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-search"></i> Pesquisar
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Qtd.</th>
+            <th>Peso Médio</th>
+            <th>Raça</th>
+            <th>Preço</th>
+            <th>Alimentação</th>
+            <th>Localização</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#LT7845</td>
+            <td>120 cabeças</td>
+            <td>450 kg</td>
+            <td>Nelore</td>
+            <td>R$ 600,00/cabeça</td>
+            <td>Pastagem</td>
+            <td>MT</td>
+            <td class="table-actions">
+              <button class="btn btn-outline btn-sm">Detalhes</button>
+              <button class="btn btn-primary btn-sm">Adicionar</button>
+            </td>
+          </tr>
+          <tr>
+            <td>#LT7812</td>
+            <td>85 cabeças</td>
+            <td>480 kg</td>
+            <td>Angus</td>
+            <td>R$ 850,00/cabeça</td>
+            <td>Confinamento</td>
+            <td>MS</td>
+            <td class="table-actions">
+              <button class="btn btn-outline btn-sm">Detalhes</button>
+              <button class="btn btn-primary btn-sm">Adicionar</button>
+            </td>
+          </tr>
+          <tr>
+            <td>#LT7798</td>
+            <td>150 cabeças</td>
+            <td>420 kg</td>
+            <td>Brangus</td>
+            <td>R$ 720,00/cabeça</td>
+            <td>Semi-confinamento</td>
+            <td>GO</td>
+            <td class="table-actions">
+              <button class="btn btn-outline btn-sm">Detalhes</button>
+              <button class="btn btn-primary btn-sm">Adicionar</button>
+            </td>
+          </tr>
+          <tr>
+            <td>#LT7754</td>
+            <td>65 cabeças</td>
+            <td>500 kg</td>
+            <td>Hereford</td>
+            <td>R$ 900,00/cabeça</td>
+            <td>Pastagem</td>
+            <td>MG</td>
+            <td class="table-actions">
+              <button class="btn btn-outline btn-sm">Detalhes</button>
+              <button class="btn btn-primary btn-sm">Adicionar</button>
+            </td>
+          </tr>
+          <tr>
+            <td>#LT7721</td>
+            <td>95 cabeças</td>
+            <td>460 kg</td>
+            <td>Guzerá</td>
+            <td>R$ 680,00/cabeça</td>
+            <td>Pastagem</td>
+            <td>SP</td>
+            <td class="table-actions">
+              <button class="btn btn-outline btn-sm">Detalhes</button>
+              <button class="btn btn-primary btn-sm">Adicionar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ul class="pagination">
+        <li class="page-item">
+          <a href="#" class="page-link"><i class="fas fa-chevron-left"></i></a>
+        </li>
+        <li class="page-item">
+          <a href="#" class="page-link active">1</a>
+        </li>
+        <li class="page-item">
+          <a href="#" class="page-link">2</a>
+        </li>
+        <li class="page-item">
+          <a href="#" class="page-link">3</a>
+        </li>
+        <li class="page-item">
+          <a href="#" class="page-link"><i class="fas fa-chevron-right"></i></a>
+        </li>
+      </ul>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuItems = document.querySelectorAll('.menu-item');
+      
+      menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+          menuItems.forEach(i => i.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+      
+      const sidebar = document.querySelector('.sidebar');
+      if (window.innerWidth <= 1024) {
+        sidebar.classList.add('active');
+      }
+    });
+  </script>
+</body>
+</html>

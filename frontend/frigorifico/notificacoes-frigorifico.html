@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>BovinTrade - Notificações</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #a30000;
+      --primary-light: #d43b3b;
+      --primary-dark: #7a0000;
+      --secondary: #f8f5f2;
+      --text: #333333;
+      --text-light: #666666;
+      --background: #ffffff;
+      --border: #e0e0e0;
+      --success: #4caf50;
+      --warning: #ff9800;
+      --info: #2196f3;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      height: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: white;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo i {
+      font-size: 1.5rem;
+    }
+
+    .user-menu {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .user-menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    .user-menu a:hover {
+      opacity: 0.9;
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .user-avatar:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .container {
+      display: flex;
+      min-height: calc(100vh - 76px);
+    }
+
+    .sidebar {
+      width: 280px;
+      background-color: var(--background);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 0;
+      transition: transform 0.3s ease;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .sidebar-header {
+      padding: 0 1.5rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-title {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-light);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar-menu {
+      list-style: none;
+    }
+
+    .menu-category {
+      color: var(--text-light);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.75rem 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .menu-item {
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s;
+      border-left: 3px solid transparent;
+    }
+
+    .menu-item i {
+      width: 24px;
+      text-align: center;
+      color: var(--text-light);
+    }
+
+    .menu-item:hover {
+      background-color: rgba(163, 0, 0, 0.05);
+      color: var(--primary);
+      border-left: 3px solid var(--primary);
+    }
+
+    .menu-item:hover i {
+      color: var(--primary);
+    }
+
+    .menu-item.active {
+      background-color: rgba(163, 0, 0, 0.1);
+      color: var(--primary);
+      border-left: 3px solid var(--primary);
+    }
+
+    .menu-item.active i {
+      color: var(--primary);
+    }
+
+    .main {
+      flex: 1;
+      padding: 2.5rem;
+      background-color: #f9f9f9;
+      position: relative;
+      overflow-y: auto;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .dashboard-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .dashboard-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(163, 0, 0, 0.2);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background-color: rgba(163, 0, 0, 0.05);
+    }
+
+    .profile-card {
+      background-color: var(--background);
+      border-radius: 12px;
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .profile-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .profile-title i {
+      color: var(--primary);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .form-actions {
+      grid-column: span 2;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .system-options {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .system-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .radio-option input {
+      width: auto;
+    }
+
+    /* Estilos específicos para notificações */
+    .notifications-container {
+      background-color: var(--background);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .notification-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    .notification-tab {
+      padding: 0.75rem 1.5rem;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-light);
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .notification-tab.active {
+      color: var(--primary);
+      border-bottom: 3px solid var(--primary);
+    }
+
+    .notification-tab:hover:not(.active) {
+      color: var(--text);
+    }
+
+    .notification-list {
+      list-style: none;
+    }
+
+    .notification-item {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 1.5rem;
+      transition: background-color 0.2s;
+    }
+
+    .notification-item:last-child {
+      border-bottom: none;
+    }
+
+    .notification-item:hover {
+      background-color: rgba(163, 0, 0, 0.03);
+    }
+
+    .notification-item.unread {
+      background-color: rgba(163, 0, 0, 0.05);
+    }
+
+    .notification-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .notification-icon i {
+      color: var(--primary);
+    }
+
+    .notification-content {
+      flex: 1;
+    }
+
+    .notification-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .notification-time {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      font-weight: 400;
+    }
+
+    .notification-message {
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .notification-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .notification-action {
+      font-size: 0.85rem;
+      color: var(--primary);
+      cursor: pointer;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .notification-action:hover {
+      color: var(--primary-dark);
+    }
+
+    .notification-preference {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .preference-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .preference-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .preference-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      background-color: var(--secondary);
+      border-radius: 8px;
+    }
+
+    .preference-label {
+      font-weight: 500;
+    }
+
+    .preference-switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+
+    .preference-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .preference-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 24px;
+    }
+
+    .preference-slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .preference-slider {
+      background-color: var(--primary);
+    }
+
+    input:checked + .preference-slider:before {
+      transform: translateX(26px);
+    }
+
+    @media (max-width: 1024px) {
+      .sidebar {
+        position: fixed;
+        top: 76px;
+        left: 0;
+        bottom: 0;
+        transform: translateX(-100%);
+        z-index: 90;
+        background-color: var(--background);
+      }
+
+      .sidebar.active {
+        transform: translateX(0);
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full-width, .form-actions {
+        grid-column: span 1;
+      }
+
+      .profile-card {
+        padding: 1.5rem;
+      }
+
+      .preference-options {
+        grid-template-columns: 1fr;
+      }
+
+      .notification-item {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 1rem;
+      }
+
+      .logo span {
+        display: none;
+      }
+
+      .user-menu a:not(.user-avatar) {
+        display: none;
+      }
+
+      .main {
+        padding: 1rem;
+      }
+
+      .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .form-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .notification-tabs {
+        flex-wrap: wrap;
+      }
+
+      .notification-tab {
+        flex: 1;
+        text-align: center;
+        padding: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+ <div class="logo">
+   <a href="07 - painel-frigorifico.html" style="text-decoration: none;"> 🐄 </a> <!-- Emoji de vaca -->
+    <span><a href="07 - painel-frigorifico.html" style="text-decoration: none; color: white;">BovinTrade </a></span>
+  </div>
+    <div class="user-menu">
+      <a href="notificacoes-frigorifico.html"><i class="fas fa-bell"></i></a>
+
+      <a href="meu-perfil-frigorifico.html">Minha Conta</a>
+      <div class="user-avatar">
+        <i class="fas fa-user"></i>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-title">Menu Principal</div>
+      </div>
+
+      <ul class="sidebar-menu">
+      <li class="menu-category">Frigorífico</li>
+        <a href="07 - painel-frigorifico.html" class="menu-item active">
+          <i class="fas fa-industry"></i>
+          <span>Painel do Frigorífico</span>
+        </a>
+        <a href="08 - meu-carrinho.html" class="menu-item">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Meu Carrinho</span>
+        </a>
+        <a href="pesquisa-lotes.html" class="menu-item">
+          <i class="fas fa-search"></i>
+          <span>Pesquisa de Lotes</span>
+        </a>
+        <a href="09 - recebimento-lotes.html" class="menu-item">
+          <i class="fas fa-truck-loading"></i>
+          <span>Recebimento de Lotes</span>
+        </a>
+        <a href="10 - historico-compras.html" class="menu-item">
+          <i class="fas fa-history"></i>
+          <span>Histórico de Compras</span>
+        </a>
+          <a href="08 - pagamentofeito.html" class="menu-item">
+    <i class="fas fa-truck"></i>
+    <span>Pagamento Transportadora</span>
+  </a>
+        <a href="11 - historicopgtofeito.html" class="menu-item">
+          <i class="fas fa-money-bill-wave"></i>
+          <span>Histórico de Pagamentos Feitos</span>
+        </a>
+        <a href="12 - avaliar-vendedor.html" class="menu-item">
+          <i class="fas fa-star"></i>
+          <span>Avaliar Vendedor</span>
+        </a>
+                <a href="13 - avaliar-entrega.html" class="menu-item">
+          <i class="fas fa-truck"></i>
+          <span>Avaliar Entrega</span>
+        </a>
+          <a href="meu-perfil-frigorifico.html" class="menu-item">
+    <i class="fas fa-user-cog"></i>
+    <span>Meu Perfil</span>
+  </a>
+
+      <a href="notificacoes-frigorifico.html" class="menu-item">
+    <i class="fas fa-bell"></i></i>
+    <span>Notificaçoes</span>
+  </a>
+          <a href="../cadastro/login.html" class="menu-item">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Sair</span>
+        </a>
+</ul>
+    </aside>
+
+    <main class="main">
+      <div class="dashboard-header">
+        <h1 class="dashboard-title">Notificações</h1>
+        <div class="dashboard-actions">
+          <button class="btn btn-outline">
+            <i class="fas fa-check-circle"></i> Marcar todas como lidas
+          </button>
+          <button class="btn btn-primary">
+            <i class="fas fa-cog"></i> Configurações
+          </button>
+        </div>
+      </div>
+
+      <div class="notifications-container">
+        <div class="notification-tabs">
+          <div class="notification-tab active">Todas</div>
+          <div class="notification-tab">Não lidas</div>
+          <div class="notification-tab">Sistema</div>
+          <div class="notification-tab">Negociações</div>
+          <div class="notification-tab">Transporte</div>
+        </div>
+
+        <ul class="notification-list">
+          <!-- Notificação 1 - Nova oferta/interesse em lote -->
+          <li class="notification-item unread">
+            <div class="notification-icon">
+              <i class="fas fa-handshake"></i>
+            </div>
+            <div class="notification-content">
+              <div class="notification-title">
+                <span>Nova proposta recebida</span>
+                <span class="notification-time">há 15 minutos</span>
+              </div>
+              <p class="notification-message">
+                Fazenda Santa Rita fez uma oferta de R$ 125.000,00 para o lote #BOV-2023-0456.
+              </p>
+              <div class="notification-actions">
+                <span class="notification-action">Ver proposta</span>
+                <span class="notification-action">Aceitar</span>
+                <span class="notification-action">Recusar</span>
+              </div>
+            </div>
+          </li>
+
+          <!-- Notificação 2 - Confirmação de compra -->
+          <li class="notification-item unread">
+            <div class="notification-icon">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="notification-content">
+              <div class="notification-title">
+                <span>Compra confirmada</span>
+                <span class="notification-time">há 2 horas</span>
+              </div>
+              <p class="notification-message">
+                Sua compra do lote #BOV-2023-0456 foi confirmada. Prepare-se para o agendamento de transporte.
+              </p>
+              <div class="notification-actions">
+                <span class="notification-action">Ver detalhes</span>
+                <span class="notification-action">Agendar transporte</span>
+              </div>
+            </div>
+          </li>
+
+          <!-- Notificação 3 - Pagamento realizado -->
+          <li class="notification-item">
+            <div class="notification-icon">
+              <i class="fas fa-money-bill-wave"></i>
+            </div>
+            <div class="notification-content">
+              <div class="notification-title">
+                <span>Pagamento confirmado</span>
+                <span class="notification-time">ontem, 14:30</span>
+              </div>
+              <p class="notification-message">
+                O pagamento para o lote #BOV-2023-0456 foi processado com sucesso. Valor: R$ 125.000,00.
+              </p>
+              <div class="notification-actions">
+                <span class="notification-action">Ver comprovante</span>
+                <span class="notification-action">Exportar recibo</span>
+              </div>
+            </div>
+          </li>
+
+          <!-- Notificação 4 - Agendamento de transporte -->
+          <li class="notification-item">
+            <div class="notification-icon">
+              <i class="fas fa-truck"></i>
+            </div>
+            <div class="notification-content">
+              <div class="notification-title">
+                <span>Transporte agendado</span>
+                <span class="notification-time">ontem, 10:15</span>
+              </div>
+              <p class="notification-message">
+                O transporte para o lote #BOV-2023-0456 foi agendado para 25/11/2023 às 08:00 com a Transportadora Boiadeiro.
+              </p>
+              <div class="notification-actions">
+                <span class="notification-action">Ver detalhes</span>
+                <span class="notification-action">Alterar agendamento</span>
+              </div>
+            </div>
+          </li>
+
+          <!-- Notificação 5 - Atualização de status de entrega -->
+          <li class="notification-item">
+            <div class="notification-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="notification-content">
+              <div class="notification-title">
+                <span>Status de entrega atualizado</span>
+                <span class="notification-time">25/11/2023, 09:45</span>
+              </div>
+              <p class="notification-message">
+                O lote #BOV-2023-0456 está a caminho. Previsão de chegada: 25/11/2023 às 12:00.
+              </p>
+              <div class="notification-actions">
+                <span class="notification-action">Acompanhar entrega</span>
+                <span class="notification-action">Falar com motorista</span>
+              </div>
+            </div>
+          </li>
+
+          <!-- Notificação 6 - Confirmação de agendamento -->
+          <li class="notification-item">
+            <div class="notification-icon">
+              <i class="fas fa-calendar-check"></i>
+            </div>
+            <div class="notification-content">
+              <div class="notification-title">
+                <span>Agendamento confirmado</span>
+                <span class="notification-time">24/11/2023, 16:20</span>
+              </div>
+              <p class="notification-message">
+                A fazenda confirmou o agendamento para 25/11/2023 às 08:00. Veículo: Mercedes-Benz Atego 2425 (ABC-1234).
+              </p>
+              <div class="notification-actions">
+                <span class="notification-action">Ver detalhes</span>
+              </div>
+            </div>
+          </li>
+
+          <!-- Notificação 7 - Validação de retirada -->
+          <li class="notification-item">
+            <div class="notification-icon">
+              <i class="fas fa-qrcode"></i>
+            </div>
+            <div class="notification-content">
+              <div class="notification-title">
+                <span>Retirada confirmada</span>
+                <span class="notification-time">25/11/2023, 08:30</span>
+              </div>
+              <p class="notification-message">
+                A fazenda validou a retirada do lote #BOV-2023-0456 através do QR Code. Transporte iniciado.
+              </p>
+              <div class="notification-actions">
+                <span class="notification-action">Ver comprovante</span>
+              </div>
+            </div>
+          </li>
+
+          <!-- Notificação 8 - Problema na retirada -->
+          <li class="notification-item unread">
+            <div class="notification-icon" style="color: var(--warning);">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="notification-content">
+              <div class="notification-title">
+                <span>Problema na retirada</span>
+                <span class="notification-time">há 1 hora</span>
+              </div>
+              <p class="notification-message">
+                A fazenda recusou a retirada do lote #BOV-2023-0789 devido a divergência na documentação do motorista.
+              </p>
+              <div class="notification-actions">
+                <span class="notification-action">Resolver problema</span>
+                <span class="notification-action">Falar com suporte</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <div class="notification-preference">
+          <h3 class="preference-title">Preferências de Notificação</h3>
+          <div class="preference-options">
+            <div class="preference-option">
+              <span class="preference-label">Notificações por e-mail</span>
+              <label class="preference-switch">
+                <input type="checkbox" checked>
+                <span class="preference-slider"></span>
+              </label>
+            </div>
+            <div class="preference-option">
+              <span class="preference-label">Notificações no sistema</span>
+              <label class="preference-switch">
+                <input type="checkbox" checked>
+                <span class="preference-slider"></span>
+              </label>
+            </div>
+            <div class="preference-option">
+              <span class="preference-label">Novas propostas</span>
+              <label class="preference-switch">
+                <input type="checkbox" checked>
+                <span class="preference-slider"></span>
+              </label>
+            </div>
+            <div class="preference-option">
+              <span class="preference-label">Confirmações de compra</span>
+              <label class="preference-switch">
+                <input type="checkbox" checked>
+                <span class="preference-slider"></span>
+              </label>
+            </div>
+            <div class="preference-option">
+              <span class="preference-label">Pagamentos</span>
+              <label class="preference-switch">
+                <input type="checkbox" checked>
+                <span class="preference-slider"></span>
+              </label>
+            </div>
+            <div class="preference-option">
+              <span class="preference-label">Transporte</span>
+              <label class="preference-switch">
+                <input type="checkbox" checked>
+                <span class="preference-slider"></span>
+              </label>
+            </div>
+            <div class="preference-option">
+              <span class="preference-label">Problemas</span>
+              <label class="preference-switch">
+                <input type="checkbox" checked>
+                <span class="preference-slider"></span>
+              </label>
+            </div>
+            <div class="preference-option">
+              <span class="preference-label">Promoções</span>
+              <label class="preference-switch">
+                <input type="checkbox">
+                <span class="preference-slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuItems = document.querySelectorAll('.menu-item');
+      const notificationTabs = document.querySelectorAll('.notification-tab');
+      
+      // Ativar menu item clicado
+      menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+          menuItems.forEach(i => i.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+      
+      // Ativar tab de notificação clicada
+      notificationTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          notificationTabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+      
+      // Responsividade do sidebar
+      const sidebar = document.querySelector('.sidebar');
+      if (window.innerWidth <= 1024) {
+        sidebar.classList.add('active');
+      }
+    });
+  </script>
+</body>
+</html>
