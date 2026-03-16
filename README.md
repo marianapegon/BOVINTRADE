@@ -29,4 +29,4 @@ O **Bovintrade** é um sistema digital desenvolvido para modernizar e agilizar a
 * **Documentação Geral:** Colaboração de todos os membros.
 
 ---
-
+> ✨ *Este projeto está em constante evolução.*
