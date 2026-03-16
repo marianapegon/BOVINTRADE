@@ -1,15 +1,15 @@
 ## 📌 Visão Geral
 
-Desenvolver um sistema digital que modernize e agilize a comercialização de gado, reduzindo custos e aumentando a transparência das transações. Além disso, o projeto visa facilitar a logística e o planejamento das compras.
+O **Bovintrade** é um sistema digital desenvolvido para modernizar e agilizar a comercialização de gado. O objetivo é reduzir custos operacionais, aumentar a transparência nas transações e facilitar a logística e o planejamento de compras no setor agropecuário.
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-> **Nota de Transição:** O projeto iniciou seu desenvolvimento utilizando **Java**, porém, visando maior agilidade e integração, a equipe migrou para o **PHP**. Atualmente, o Backend e o Frontend estão integrados nos mesmos arquivos para otimizar o fluxo de dados e evitar erros de comunicação entre camadas.
+> **Nota de Evolução Tecnológica:** O projeto foi iniciado em **Java**, mas a equipe optou pela migração estratégica para o **PHP**. Essa mudança permitiu uma arquitetura onde o Backend e o Frontend operam de forma integrada, otimizando a performance e minimizando erros de comunicação entre camadas.
 
 - **Frontend:** HTML, CSS, JavaScript
-- **Backend:** PHP 
+- **Backend:** PHP (Integrado)
 - **Banco de Dados:** SQL
 
 ---
@@ -18,17 +18,15 @@ Desenvolver um sistema digital que modernize e agilize a comercialização de ga
 
 **[BOVINTRADE]**
 
-O projeto foi construído de forma colaborativa com a seguinte divisão de responsabilidades:
-
-| Membro | Função Principal | Atuação |
+| Membro | Função | Atuação Principal |
 | :--- | :--- | :--- |
-| **Mariana Pereira Gonçalves** | **Frontend** | Desenvolvimento da interface e experiência do usuário. |
-| **Maria Clara Soares Bertolo** | **Backend & SQL** | Lógica do sistema e estruturação do banco de dados. |
-| **Elisandra Carol da Silva** | **Backend & SQL** | Lógica do sistema e estruturação do banco de dados. |
-| **Fábio Ribeiro Barbosa** | **Apoio Geral** | Suporte estratégico e foco principal na documentação. |
-| **Thaissa Rodrigues Martins** | **Documentação** | Participou da etapa inicial de documentação do projeto. |
+| **Elisandra Carol da Silva** | **Desenvolvedora Fullstack** | Implementação de regras de negócio, Banco de Dados e integração com a interface. |
+| **Fábio Ribeiro Barbosa** | **Documentação e Apoio** | Suporte estratégico e desenvolvimento de documentação técnica. |
+| **Maria Clara Soares Bertolo** | **Desenvolvedora Fullstack** | Implementação de regras de negócio, Banco de Dados e integração com a interface. |
+| **Mariana Pereira Gonçalves** | **Frontend** | Design de interface e experiência do usuário (UX/UI). |
+| **Thaissa Rodrigues Martins** | **Documentação** | Participação na etapa inicial de levantamento e documentação. |
 
-* **Documentação:** Colaboração de todos os membros.
+* **Documentação Geral:** Colaboração de todos os membros.
 
 ---
 
