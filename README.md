@@ -20,9 +20,9 @@ O **Bovintrade** é um sistema digital desenvolvido para modernizar e agilizar a
 
 | Membro | Função | Atuação Principal |
 | :--- | :--- | :--- |
-| **Elisandra Carol da Silva** | **Desenvolvedora Fullstack** | Implementação de regras de negócio, Banco de Dados e integração com a interface. |
+| **Elisandra Carol da Silva** | **Desenvolvedora Fullstack** | Implementação de regras de negócio, Desenvolvimento Backend, Banco de Dados e integração com a interface. |
 | **Fábio Ribeiro Barbosa** | **Documentação e Apoio** | Suporte estratégico na programação e desenvolvimento de documentação técnica. |
-| **Maria Clara Soares Bertolo** | **Desenvolvedora Fullstack** | Implementação de regras de negócio, Banco de Dados e integração com a interface. |
+| **Maria Clara Soares Bertolo** | **Desenvolvedora Fullstack** | Implementação de regras de negócio, Desenvolvimento Backend, Banco de Dados e integração com a interface. |
 | **Mariana Pereira Gonçalves** | **Frontend** | Design de interface e experiência do usuário (UX/UI). |
 | **Thaissa Rodrigues Martins** | **Documentação** | Participação na etapa inicial de levantamento e documentação. |
 
